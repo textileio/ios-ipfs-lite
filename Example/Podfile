@@ -1,0 +1,14 @@
+use_frameworks!
+
+platform :ios, '8.0'
+
+target 'IpfsLiteApi_Example' do
+  pod 'IpfsLiteApi', :path => '../'
+
+  target 'IpfsLiteApi_Tests' do
+    inherit! :search_paths
+
+    pod 'Specta'
+    pod 'Expecta'
+  end
+end
