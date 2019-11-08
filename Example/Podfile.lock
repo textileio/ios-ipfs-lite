@@ -1,0 +1,97 @@
+PODS:
+  - "!ProtoCompiler (3.8.0)":
+    - Protobuf (~> 3.0)
+  - "!ProtoCompiler-gRPCPlugin (1.25.0)":
+    - "!ProtoCompiler (= 3.8.0)"
+    - gRPC-ProtoRPC (= 1.25.0)
+  - BoringSSL-GRPC (0.0.5):
+    - BoringSSL-GRPC/Implementation (= 0.0.5)
+    - BoringSSL-GRPC/Interface (= 0.0.5)
+  - BoringSSL-GRPC/Implementation (0.0.5):
+    - BoringSSL-GRPC/Interface (= 0.0.5)
+  - BoringSSL-GRPC/Interface (0.0.5)
+  - Expecta (1.0.6)
+  - gRPC-Core (1.25.0):
+    - gRPC-Core/Implementation (= 1.25.0)
+    - gRPC-Core/Interface (= 1.25.0)
+  - gRPC-Core/Implementation (1.25.0):
+    - BoringSSL-GRPC (= 0.0.5)
+    - gRPC-Core/Interface (= 1.25.0)
+  - gRPC-Core/Interface (1.25.0)
+  - grpc-ipfs-lite (0.0.1-rc1)
+  - gRPC-ProtoRPC (1.25.0):
+    - gRPC-ProtoRPC/Legacy (= 1.25.0)
+    - gRPC-ProtoRPC/Legacy-Header (= 1.25.0)
+    - gRPC-ProtoRPC/Main (= 1.25.0)
+  - gRPC-ProtoRPC/Legacy (1.25.0):
+    - gRPC-ProtoRPC/Legacy-Header (= 1.25.0)
+    - gRPC-ProtoRPC/Main (= 1.25.0)
+    - gRPC-RxLibrary (= 1.25.0)
+    - gRPC/GRPCCore (= 1.25.0)
+    - Protobuf (~> 3.0)
+  - gRPC-ProtoRPC/Legacy-Header (1.25.0)
+  - gRPC-ProtoRPC/Main (1.25.0):
+    - gRPC-ProtoRPC/Legacy-Header (= 1.25.0)
+    - gRPC/Interface (= 1.25.0)
+    - Protobuf (~> 3.0)
+  - gRPC-RxLibrary (1.25.0):
+    - gRPC-RxLibrary/Implementation (= 1.25.0)
+    - gRPC-RxLibrary/Interface (= 1.25.0)
+  - gRPC-RxLibrary/Implementation (1.25.0):
+    - gRPC-RxLibrary/Interface
+  - gRPC-RxLibrary/Interface (1.25.0)
+  - gRPC/GRPCCore (1.25.0):
+    - gRPC-Core (= 1.25.0)
+    - gRPC-RxLibrary (= 1.25.0)
+    - gRPC/Interface (= 1.25.0)
+    - gRPC/Interface-Legacy (= 1.25.0)
+  - gRPC/Interface (1.25.0):
+    - gRPC/Interface-Legacy (= 1.25.0)
+  - gRPC/Interface-Legacy (1.25.0):
+    - gRPC-RxLibrary/Interface (= 1.25.0)
+  - IpfsLiteApi (0.1.0):
+    - "!ProtoCompiler-gRPCPlugin (~> 1.0)"
+    - grpc-ipfs-lite (= 0.0.1-rc1)
+  - Protobuf (3.10.0)
+  - Specta (1.0.7)
+
+DEPENDENCIES:
+  - Expecta
+  - IpfsLiteApi (from `../`)
+  - Specta
+
+SPEC REPOS:
+  trunk:
+    - "!ProtoCompiler"
+    - "!ProtoCompiler-gRPCPlugin"
+    - BoringSSL-GRPC
+    - Expecta
+    - gRPC
+    - gRPC-Core
+    - grpc-ipfs-lite
+    - gRPC-ProtoRPC
+    - gRPC-RxLibrary
+    - Protobuf
+    - Specta
+
+EXTERNAL SOURCES:
+  IpfsLiteApi:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  "!ProtoCompiler": 7fc49078ec544d0347264496f6cd09b8132536b5
+  "!ProtoCompiler-gRPCPlugin": 5359f08272bb60883bedc61fb5ad7544aeb96fa9
+  BoringSSL-GRPC: 8f2c6b5fbae71d1f3aabb787a52fd4929d1eef33
+  Expecta: 3b6bd90a64b9a1dcb0b70aa0e10a7f8f631667d5
+  gRPC: 7fb3e0d14ce1f87f1c27a9e46167da5168ab9092
+  gRPC-Core: 76552aeeae7c42172d52224cc6f3cf70bff577f5
+  grpc-ipfs-lite: 994a0ac6d6362f1d333625296f1d5f0a87777705
+  gRPC-ProtoRPC: b00a140f2f21872305cd8e3ef91b2dfe28914b5c
+  gRPC-RxLibrary: cd49d9cd343fd00e2326a65522e82c2285ebe84b
+  IpfsLiteApi: 90e3463d75dbf37cfa566183736b74d2b12f26e1
+  Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
+  Specta: 3e1bd89c3517421982dc4d1c992503e48bd5fe66
+
+PODFILE CHECKSUM: dc4c2ed6cc7c4e4c0f881851ba718b949045e69a
+
+COCOAPODS: 1.8.4
