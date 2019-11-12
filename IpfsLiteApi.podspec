@@ -41,7 +41,7 @@ TODO: Add long description of the pod here.
   s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
-  s.dependency 'grpc-ipfs-lite', '0.0.1-rc1'
+  s.dependency 'grpc-ipfs-lite', '0.0.1-rc3'
   
   # Base directory where the .proto files are.
   src = '../grpc-ipfs-lite/ipfs-lite'

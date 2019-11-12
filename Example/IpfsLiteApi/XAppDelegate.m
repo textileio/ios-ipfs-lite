@@ -9,69 +9,28 @@
 #import "XAppDelegate.h"
 #import <IpfsLiteApi/IpfsLiteApi-umbrella.h>
 
-@interface ResponseHandler : NSObject<GRPCProtoResponseHandler>
-
-@end
-
-// A response handler object dispatching messages to main queue
-@implementation ResponseHandler
-
-- (dispatch_queue_t)dispatchQueue {
-    return dispatch_get_main_queue();
-}
-
-- (void)didReceiveProtoMessage:(GPBMessage *)message {
-    NSLog(@"%@", message);
-}
-
-- (void)didCloseWithTrailingMetadata:(NSDictionary *)trailingMetadata error:(NSError *)error {
-    NSLog(@"closed - %@", error.localizedDescription);
-}
-
-@end
-
 @implementation XAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     
-    NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *repoPath = [documents stringByAppendingPathComponent:@"ipfs-lite"];
-    NSError *error;
-    [IpfsLiteApi launch:repoPath error:&error];
-    if (error) {
-        NSLog(@"error launching: %@", error.localizedDescription);
-    }
-    
-    ResponseHandler *h = [[ResponseHandler alloc] init];
-    
-    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
-    options.transportType = GRPCTransportTypeInsecure;
-    
-    GRPCStreamingProtoCall *addCall = [IpfsLiteApi.instance.client addFileWithResponseHandler:h callOptions:options];
-    
-    AddParams *addParams = [[AddParams alloc] init];
-    AddFileRequest *addParamsRequest = [[AddFileRequest alloc] init];
-    [addParamsRequest setAddParams:addParams];
-    
-    [addCall start];
-    
-    [addCall writeMessage:addParamsRequest];
-    
-    AddFileRequest *addChunkRequest = [[AddFileRequest alloc] init];
-    [addChunkRequest setChunk:[@"Hello there" dataUsingEncoding:kCFStringEncodingUTF8]];
-    
-    [addCall writeMessage:addChunkRequest];
-    
-    [addCall finish];
-    
-//    GetFileRequest *request = [[GetFileRequest alloc] init];
-//    [request setCid:@"QmY7Yh4UquoXHLPFo2XbhXkhBvFoPwmQUSa92pxnxjQuPU"];
+//    NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//    NSString *repoPath = [documents stringByAppendingPathComponent:@"ipfs-lite"];
+//    NSError *error;
+//    [IpfsLiteApi launch:repoPath debug:false error:&error];
+//    if (error) {
+//        NSLog(@"error launching: %@", error.localizedDescription);
+//    }
 //    
-//    GRPCUnaryProtoCall *call = [IpfsLiteApi.instance.client getFileWithMessage:request responseHandler:h callOptions:options];
-//    
-//    [call start];
+//    NSInputStream *input = [[NSInputStream alloc] initWithData:[@"Hello there" dataUsingEncoding:NSUTF8StringEncoding]];
+//    [IpfsLiteApi.instance addFileWithParams:[[AddParams alloc] init] input:input completion:^(Node * _Nullable node, NSError * _Nullable error) {
+//        if (!node) {
+//            NSLog(@"got error: %@", error.localizedDescription);
+//        } else {
+//            NSLog(@"got node: %@", node);
+//        }
+//    }];
     
     return YES;
 }
