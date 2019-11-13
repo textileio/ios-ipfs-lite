@@ -44,7 +44,7 @@ TODO: Add long description of the pod here.
   s.dependency 'grpc-ipfs-lite', '0.0.1-rc3'
   
   # Base directory where the .proto files are.
-  src = '../grpc-ipfs-lite/ipfs-lite'
+  src = './pb'
 
   # We'll use protoc with the gRPC plugin.
   s.dependency '!ProtoCompiler-gRPCPlugin', '~> 1.0'
