@@ -41,7 +41,7 @@ jobs:
 
 workflows:
   version: 2
-  ios-textile:
+  ios-ipfs-lite:
     jobs:
       - tests
       - publish-pod:
