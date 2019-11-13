@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   tests:
     macos:
-      xcode: "10.2.1"
+      xcode: "11.2.0"
     steps:
       - checkout
       - run: bundle install
@@ -22,7 +22,7 @@ jobs:
 
   publish-pod:
     macos:
-      xcode: "10.2.1"
+      xcode: "11.2.0"
     steps:
       - checkout
       - run: bundle install
