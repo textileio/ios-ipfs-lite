@@ -102,9 +102,6 @@ describe(@"test the api", ^{
             [IpfsLiteApi.instance getNodeForCid:@"QmSnuWmxptJZdLJpKRarxBMS2Ju2oANVrgbr2xWbie9b2D" completion:^(Node * _Nullable node, NSError * _Nullable error) {
                 expect(error).beNil();
                 expect(node).notTo.beNil();
-                for (Link *link in node.linksArray) {
-                    NSLog(@"%@ : %@", link.name, link.cid);
-                }
                 done();
             }];
         });
