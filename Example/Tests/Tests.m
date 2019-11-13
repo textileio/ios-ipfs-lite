@@ -48,6 +48,9 @@ SpecBegin(InitialSpecs)
 
 describe(@"test the api", ^{
     
+    __block Node *refTextNode;
+    __block Node *refImageNode;
+    
     it(@"should start", ^{
         NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         NSString *repoPath = [documents stringByAppendingPathComponent:@"ipfs-lite"];
@@ -63,6 +66,7 @@ describe(@"test the api", ^{
             [IpfsLiteApi.instance addFileWithParams:[[AddParams alloc] init] input:input completion:^(Node * _Nullable node, NSError * _Nullable error) {
                 expect(error).beNil();
                 expect(node).notTo.beNil();
+                refTextNode = node;
                 done();
             }];
         });
@@ -75,6 +79,19 @@ describe(@"test the api", ^{
             [IpfsLiteApi.instance addFileWithParams:[[AddParams alloc] init] input:input completion:^(Node * _Nullable node, NSError * _Nullable error) {
                 expect(error).beNil();
                 expect(node).notTo.beNil();
+                refImageNode = node;
+                done();
+            }];
+        });
+    });
+    
+    it(@"should get a file", ^{
+        waitUntil(^(DoneCallback done) {
+            [IpfsLiteApi.instance getFileWithCid:refTextNode.block.cid completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+                expect(error).beNil();
+                expect(data).notTo.beNil();
+                NSString *result = [NSString stringWithUTF8String:[data bytes]];
+                expect(result).equal(@"Hello there");
                 done();
             }];
         });
