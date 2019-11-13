@@ -23,6 +23,8 @@
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		8A37EB999109655650612DDE /* Pods_IpfsLiteApi_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1C3C59225C63065CD081E4 /* Pods_IpfsLiteApi_Example.framework */; };
+		9304BA07237A5DB600C86ECE /* test.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9304BA06237A5DB600C86ECE /* test.jpeg */; };
+		9304BA08237A5DB600C86ECE /* test.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9304BA06237A5DB600C86ECE /* test.jpeg */; };
 		A8EC0BB690424709CA763180 /* Pods_IpfsLiteApi_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 512B0C7EB129ED4782039798 /* Pods_IpfsLiteApi_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,11 +63,12 @@
 		6C1C3C59225C63065CD081E4 /* Pods_IpfsLiteApi_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IpfsLiteApi_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		88936F625B8447B28D448495 /* IpfsLiteApi.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = IpfsLiteApi.podspec; path = ../IpfsLiteApi.podspec; sourceTree = "<group>"; };
-		901BEDFFAECFBB347EB32095 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		88936F625B8447B28D448495 /* IpfsLiteApi.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = IpfsLiteApi.podspec; path = ../IpfsLiteApi.podspec; sourceTree = "<group>"; };
+		901BEDFFAECFBB347EB32095 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		9304BA06237A5DB600C86ECE /* test.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpeg; sourceTree = "<group>"; };
 		ACA167CC6B85F28190A35361 /* Pods-IpfsLiteApi_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IpfsLiteApi_Tests.release.xcconfig"; path = "Target Support Files/Pods-IpfsLiteApi_Tests/Pods-IpfsLiteApi_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		E607E06CB29D1C3B77C86AE8 /* Pods-IpfsLiteApi_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IpfsLiteApi_Example.release.xcconfig"; path = "Target Support Files/Pods-IpfsLiteApi_Example/Pods-IpfsLiteApi_Example.release.xcconfig"; sourceTree = "<group>"; };
-		F49EDE59622DE6D961EC1D1D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		F49EDE59622DE6D961EC1D1D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		F793B7CF54D4879651AD95B1 /* Pods-IpfsLiteApi_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IpfsLiteApi_Example.debug.xcconfig"; path = "Target Support Files/Pods-IpfsLiteApi_Example/Pods-IpfsLiteApi_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,6 +162,7 @@
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				9304BA06237A5DB600C86ECE /* test.jpeg */,
 				6003F5BB195388D20070C39A /* Tests.m */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 			);
@@ -193,7 +197,6 @@
 				2718884963DE148FAFE95A60 /* Pods-IpfsLiteApi_Tests.debug.xcconfig */,
 				ACA167CC6B85F28190A35361 /* Pods-IpfsLiteApi_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -259,6 +262,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -278,6 +282,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9304BA07237A5DB600C86ECE /* test.jpeg in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
@@ -290,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */,
+				9304BA08237A5DB600C86ECE /* test.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
