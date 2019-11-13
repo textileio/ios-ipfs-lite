@@ -4,6 +4,9 @@
 [![Chat on Slack](https://img.shields.io/badge/slack-slack.textile.io-informational.svg?style=flat-square)](https://slack.textile.io)
 [![GitHub license](https://img.shields.io/github/license/textileio/ios-ipfs-lite.svg?style=flat-square)](./LICENSE)
 [![Release](https://img.shields.io/github/release/textileio/ios-ipfs-lite.svg?style=flat-square)](https://github.com/textileio/ios-ipfs-lite/releases/latest)
+[![Version](https://img.shields.io/cocoapods/v/IpfsLiteApi.svg?style=flat)](https://cocoapods.org/pods/IpfsLiteApi)
+[![License](https://img.shields.io/cocoapods/l/IpfsLiteApi.svg?style=flat)](https://cocoapods.org/pods/IpfsLiteApi)
+[![Platform](https://img.shields.io/cocoapods/p/IpfsLiteApi.svg?style=flat)](https://cocoapods.org/pods/IpfsLiteApi)
 [![CircleCI branch](https://img.shields.io/circleci/project/github/textileio/ios-ipfs-lite/master.svg?style=flat-square)](https://circleci.com/gh/textileio/ios-ipfs-lite)
 [![docs](https://img.shields.io/badge/docs-master-success.svg?style=popout-square)](https://textileio.github.io/ios-ipfs-lite/)
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
@@ -118,47 +121,3 @@ Small note: If editing the README, please conform to the [standard-readme](https
 ## License
 
 [MIT](LICENSE) (c) 2019 Textile
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# IpfsLiteApi
-
-[![Version](https://img.shields.io/cocoapods/v/IpfsLiteApi.svg?style=flat)](https://cocoapods.org/pods/IpfsLiteApi)
-[![License](https://img.shields.io/cocoapods/l/IpfsLiteApi.svg?style=flat)](https://cocoapods.org/pods/IpfsLiteApi)
-[![Platform](https://img.shields.io/cocoapods/p/IpfsLiteApi.svg?style=flat)](https://cocoapods.org/pods/IpfsLiteApi)
-
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
-
-## Installation
-
-IpfsLiteApi is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-```ruby
-pod 'IpfsLiteApi'
-```
-
-## Author
-
-Aaron Sutula, hi@asutula.com
-
-## License
-
-IpfsLiteApi is available under the MIT license. See the LICENSE file for more info.
