@@ -62,7 +62,7 @@ describe(@"test the api", ^{
     
     it(@"should add file", ^{
         waitUntil(^(DoneCallback done) {
-            NSInputStream *input = [[NSInputStream alloc] initWithData:[@"Hello there" dataUsingEncoding:NSUTF8StringEncoding]];
+            NSInputStream *input = [[NSInputStream alloc] initWithData:[@"Hello there\n" dataUsingEncoding:NSUTF8StringEncoding]];
             [IpfsLiteApi.instance addFileWithParams:[[AddParams alloc] init] input:input completion:^(Node * _Nullable node, NSError * _Nullable error) {
                 expect(error).beNil();
                 expect(node).notTo.beNil();
@@ -91,7 +91,17 @@ describe(@"test the api", ^{
                 expect(error).beNil();
                 expect(data).notTo.beNil();
                 NSString *result = [NSString stringWithUTF8String:[data bytes]];
-                expect(result).equal(@"Hello there");
+                expect(result).equal(@"Hello there\n");
+                done();
+            }];
+        });
+    });
+    
+    it(@"should get a node", ^{
+        waitUntil(^(DoneCallback done) {
+            [IpfsLiteApi.instance getNodeForCid:@"QmSnuWmxptJZdLJpKRarxBMS2Ju2oANVrgbr2xWbie9b2D" completion:^(Node * _Nullable node, NSError * _Nullable error) {
+                expect(error).beNil();
+                expect(node).notTo.beNil();
                 done();
             }];
         });
