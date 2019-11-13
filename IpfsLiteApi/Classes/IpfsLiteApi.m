@@ -91,15 +91,12 @@ const int CHUNK_SIZE = 1024*32;
     NSMutableData *data = [[NSMutableData alloc] init];
     ResponseHandler<GetFileResponse *> *handler = [[ResponseHandler alloc] init];
     handler.receive = ^(GetFileResponse *resp) {
-        NSLog(@"got %ld bytes", [resp.chunk length]);
         [data appendData:resp.chunk];
     };
     handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
         if (error) {
-            NSLog(@"completed rpc with error: %@", error.localizedDescription);
             completion(nil, error);
         } else {
-            NSLog(@"complete rpc successfully");
             completion(data, nil);
         }
     };
@@ -172,6 +169,27 @@ const int CHUNK_SIZE = 1024*32;
 //        completion(nil);
 //    });
 //}
+
+- (void)getNodeForCid:(NSString *)cid completion:(void (^)(Node * _Nullable, NSError * _Nullable))completion {
+    GetNodeRequest *request = [[GetNodeRequest alloc] init];
+    [request setCid:cid];
+    
+    ResponseHandler<GetNodeResponse *> *handler = [[ResponseHandler alloc] init];
+    handler.receive = ^(GetNodeResponse *resp) {
+        completion(resp.node, nil);
+    };
+    handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
+        if (error) {
+            completion(nil, error);
+        }
+    };
+    
+    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
+    options.transportType = GRPCTransportTypeInsecure;
+    
+    GRPCUnaryProtoCall *call = [self.client getNodeWithMessage:request responseHandler:handler callOptions:options];
+    [call start];
+}
 
 - (BOOL)stop:(NSError * _Nullable __autoreleasing *)error {
     return MobileStop(error);
