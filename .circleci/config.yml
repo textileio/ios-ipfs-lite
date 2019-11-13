@@ -1,0 +1,52 @@
+version: 2.1
+
+jobs:
+  tests:
+    macos:
+      xcode: "11.2.0"
+    steps:
+      - checkout
+      - run: bundle install
+      - run:
+          name: Fetch CocoaPods Specs
+          command: |
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+      - run:
+          name: install pods
+          working_directory: Example
+          command: bundle exec pod install --repo-update
+      - run:
+          name: test
+          working_directory: Example
+          command: bundle exec fastlane test
+
+  publish-pod:
+    macos:
+      xcode: "11.2.0"
+    steps:
+      - checkout
+      - run: bundle install
+      - run:
+          name: Fetch CocoaPods Specs
+          command: |
+            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+      - run:
+          name: update podspec
+          command: |
+            sed -i.bak "s/0.0.1-dev/${CIRCLE_TAG}/g" IpfsLiteApi.podspec
+      - run:
+          name: publish podspec
+          command: |
+            bundle exec pod trunk push --allow-warnings
+
+workflows:
+  version: 2
+  ios-ipfs-lite:
+    jobs:
+      - tests
+      - publish-pod:
+          filters:
+            tags:
+              only: /^[0-9.]+(-rc[0-9]+)?/
+            branches:
+              ignore: /.*/
