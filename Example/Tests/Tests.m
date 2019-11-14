@@ -139,12 +139,10 @@ describe(@"test the api", ^{
         waitUntil(^(DoneCallback done) {
             NSMutableArray *path = @[@"frontend", @"foo", @"bar"].mutableCopy;
             [IpfsLiteApi.instance resolveLinkInNodeWithCid:apolloArchiverCid path:path completion:^(Link * _Nullable link, NSArray<NSString *> * _Nullable remainingPath, NSError * _Nullable error) {
-                NSLog(@"GOT LINK: %@", link);
                 expect(error).beNil();
                 expect(link).notTo.beNil();
-                // TODO: Why aren't these working?
-//                expect(link.name).equal(@"frontend");
-//                expect(remainingPath).equal(@[@"foo", @"bar"]);
+                expect(link.name).equal(@"frontend");
+                expect(remainingPath).equal(@[@"foo", @"bar"]);
                 done();
             }];
         });
@@ -155,6 +153,7 @@ describe(@"test the api", ^{
             [IpfsLiteApi.instance treeInNodeWithCid:apolloArchiverCid fromPath:nil depth:-1 completion:^(NSArray<NSString *> * _Nullable paths, NSError * _Nullable error) {
                 expect(error).beNil();
                 expect(paths).notTo.beNil();
+                expect(paths.count).equal(6);
                 done();
             }];
         });
