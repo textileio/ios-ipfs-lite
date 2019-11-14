@@ -1,9 +1,4 @@
 PODS:
-  - "!ProtoCompiler (3.8.0)":
-    - Protobuf (~> 3.0)
-  - "!ProtoCompiler-gRPCPlugin (1.25.0)":
-    - "!ProtoCompiler (= 3.8.0)"
-    - gRPC-ProtoRPC (= 1.25.0)
   - BoringSSL-GRPC (0.0.5):
     - BoringSSL-GRPC/Implementation (= 0.0.5)
     - BoringSSL-GRPC/Interface (= 0.0.5)
@@ -50,8 +45,9 @@ PODS:
   - gRPC/Interface-Legacy (1.25.0):
     - gRPC-RxLibrary/Interface (= 1.25.0)
   - IpfsLiteApi (0.0.1-dev):
-    - "!ProtoCompiler-gRPCPlugin (~> 1.0)"
     - grpc-ipfs-lite (= 0.0.1-rc3)
+    - gRPC-ProtoRPC
+    - Protobuf
   - Protobuf (3.10.0)
   - Specta (1.0.7)
 
@@ -62,8 +58,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - "!ProtoCompiler"
-    - "!ProtoCompiler-gRPCPlugin"
     - BoringSSL-GRPC
     - Expecta
     - gRPC
@@ -79,8 +73,6 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  "!ProtoCompiler": 7fc49078ec544d0347264496f6cd09b8132536b5
-  "!ProtoCompiler-gRPCPlugin": 5359f08272bb60883bedc61fb5ad7544aeb96fa9
   BoringSSL-GRPC: 8f2c6b5fbae71d1f3aabb787a52fd4929d1eef33
   Expecta: 3b6bd90a64b9a1dcb0b70aa0e10a7f8f631667d5
   gRPC: 7fb3e0d14ce1f87f1c27a9e46167da5168ab9092
@@ -88,7 +80,7 @@ SPEC CHECKSUMS:
   grpc-ipfs-lite: 9e69a670ca47fa438f70e1a1a2120de18921e4c5
   gRPC-ProtoRPC: b00a140f2f21872305cd8e3ef91b2dfe28914b5c
   gRPC-RxLibrary: cd49d9cd343fd00e2326a65522e82c2285ebe84b
-  IpfsLiteApi: c461fadf83bf66fefd31193e19bd2eee316c991a
+  IpfsLiteApi: 10b6ab1f9d1f3e273d6a8f5ab2b8ff47b032495b
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
   Specta: 3e1bd89c3517421982dc4d1c992503e48bd5fe66
 

@@ -12,40 +12,6 @@
 
 SpecBegin(InitialSpecs)
 
-//describe(@"these will fail", ^{
-//
-//    it(@"can do maths", ^{
-//        expect(1).to.equal(2);
-//    });
-//
-//    it(@"can read", ^{
-//        expect(@"number").to.equal(@"string");
-//    });
-//
-//    it(@"will wait for 10 seconds and fail", ^{
-//        waitUntil(^(DoneCallback done) {
-//
-//        });
-//    });
-//});
-//
-//describe(@"these will pass", ^{
-//
-//    it(@"can do maths", ^{
-//        expect(1).beLessThan(23);
-//    });
-//
-//    it(@"can read", ^{
-//        expect(@"team").toNot.contain(@"I");
-//    });
-//
-//    it(@"will wait and succeed", ^{
-//        waitUntil(^(DoneCallback done) {
-//            done();
-//        });
-//    });
-//});
-
 describe(@"test the api", ^{
     
     __block Node *refTextNode;
@@ -92,6 +58,20 @@ describe(@"test the api", ^{
                 expect(data).notTo.beNil();
                 NSString *result = [NSString stringWithUTF8String:[data bytes]];
                 expect(result).equal(@"Hello there\n");
+                done();
+            }];
+        });
+    });
+    
+    it(@"should get a file to output stream", ^{
+        waitUntil(^(DoneCallback done) {
+            NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+            NSString *outputPath = [documents stringByAppendingPathComponent:@"out.jpeg"];
+            NSOutputStream *output = [NSOutputStream outputStreamToFileAtPath:outputPath append:NO];
+            [IpfsLiteApi.instance getFileWithCid:refImageNode.block.cid toOutput:output completion:^(NSError * _Nullable error) {
+                expect(error).beNil();
+                BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:outputPath isDirectory:false];
+                expect(exists).beTruthy();
                 done();
             }];
         });

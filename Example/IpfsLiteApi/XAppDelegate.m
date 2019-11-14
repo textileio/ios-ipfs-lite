@@ -23,13 +23,28 @@
 //        NSLog(@"error launching: %@", error.localizedDescription);
 //    }
 //    
-//    NSInputStream *input = [[NSInputStream alloc] initWithData:[@"Hello there" dataUsingEncoding:NSUTF8StringEncoding]];
+////    NSInputStream *input = [[NSInputStream alloc] initWithData:[@"Hello there\n" dataUsingEncoding:NSUTF8StringEncoding]];
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"jpeg"];
+//    NSInputStream *input = [[NSInputStream alloc] initWithFileAtPath:path];
 //    [IpfsLiteApi.instance addFileWithParams:[[AddParams alloc] init] input:input completion:^(Node * _Nullable node, NSError * _Nullable error) {
-//        if (!node) {
+//        if (error) {
 //            NSLog(@"got error: %@", error.localizedDescription);
-//        } else {
-//            NSLog(@"got node: %@", node);
+//            return;
 //        }
+//        NSLog(@"got node: %@", node);
+//        NSOutputStream *output = [NSOutputStream outputStreamToMemory];
+//        [IpfsLiteApi.instance getFileWithCid:node.block.cid toOutput:output completion:^(NSError * _Nullable error) {
+//            if (error) {
+//                NSLog(@"Completed with error: %@", error.localizedDescription);
+//                return;
+//            }
+//            NSLog(@"complete");
+//            NSData *data = [output propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
+////            NSString *val = [NSString stringWithUTF8String:[data bytes]];
+////            NSLog(@"VALUE = %@", val);
+//            UIImage *image = [UIImage imageWithData:data];
+//            NSLog(@"COOOL");
+//        }];
 //    }];
     
     return YES;
