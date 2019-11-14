@@ -98,7 +98,18 @@ NSInputStream *input = [[NSInputStream alloc] initWithFileAtPath:path];
 }];
 ```
 
-### Fetch a file by CID
+### Fetch a file by CID to a NSOutputStream
+
+```objc
+NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+NSString *outputPath = [documents stringByAppendingPathComponent:@"out.jpeg"];
+NSOutputStream *output = [NSOutputStream outputStreamToFileAtPath:outputPath append:NO];
+[IpfsLiteApi.instance getFileWithCid:@"<a-file-cid>" toOutput:output completion:^(NSError * _Nullable error) {
+    // Handle error if it exists or interact with data written to disk
+}];
+```
+
+### Fetch a node by CID
 
 ```objc
 [IpfsLiteApi.instance getNodeForCid:@"QmSnuWmxptJZdLJpKRarxBMS2Ju2oANVrgbr2xWbie9b2D" completion:^(Node * _Nullable node, NSError * _Nullable error) {
