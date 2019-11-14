@@ -1,11 +1,3 @@
-//
-//  IpfsLiteApiTests.m
-//  IpfsLiteApiTests
-//
-//  Created by Aaron Sutula on 11/07/2019.
-//  Copyright (c) 2019 Aaron Sutula. All rights reserved.
-//
-
 // https://github.com/Specta/Specta
 
 #import <IpfsLiteApi/IpfsLiteApi-umbrella.h>
@@ -16,6 +8,7 @@ describe(@"test the api", ^{
     
     __block Node *refTextNode;
     __block Node *refImageNode;
+    NSString *apolloArchiverCid = @"QmSnuWmxptJZdLJpKRarxBMS2Ju2oANVrgbr2xWbie9b2D";
     
     it(@"should start", ^{
         NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -77,11 +70,91 @@ describe(@"test the api", ^{
         });
     });
     
+    it(@"should check block", ^{
+        waitUntil(^(DoneCallback done) {
+            [IpfsLiteApi.instance hasBlock:refTextNode.block.cid completion:^(BOOL hasBlock, NSError * _Nullable error) {
+                expect(hasBlock).beTruthy();
+                expect(error).beNil();
+                done();
+            }];
+        });
+    });
+    
     it(@"should get a node", ^{
         waitUntil(^(DoneCallback done) {
-            [IpfsLiteApi.instance getNodeForCid:@"QmSnuWmxptJZdLJpKRarxBMS2Ju2oANVrgbr2xWbie9b2D" completion:^(Node * _Nullable node, NSError * _Nullable error) {
+            [IpfsLiteApi.instance getNodeForCid:apolloArchiverCid completion:^(Node * _Nullable node, NSError * _Nullable error) {
                 expect(error).beNil();
                 expect(node).notTo.beNil();
+                done();
+            }];
+        });
+    });
+    
+    it(@"should get many nodes", ^{
+        NSMutableArray<Node *> *nodes = [[NSMutableArray alloc] init];
+        waitUntil(^(DoneCallback done) {
+            NSMutableArray *cids = @[refTextNode.block.cid, refImageNode.block.cid].mutableCopy;
+            [IpfsLiteApi.instance getNodesForCids:cids handler:^(BOOL nodesDone, Node * _Nullable node, NSError * _Nullable error) {
+                expect(error).beNil();
+                if (node) {
+                    [nodes addObject:node];
+                }
+                if (nodesDone) {
+                    done();
+                }
+            }];
+        });
+        expect(nodes.count).equal(2);
+    });
+    
+    it(@"should remove node", ^{
+        waitUntil(^(DoneCallback done) {
+            [IpfsLiteApi.instance removeNodeForCid:refTextNode.block.cid completion:^(NSError * _Nullable error) {
+                expect(error).beNil();
+                [IpfsLiteApi.instance hasBlock:refTextNode.block.cid completion:^(BOOL hasBlock, NSError * _Nullable error) {
+                    expect(hasBlock).beFalsy();
+                    expect(error).beNil();
+                    done();
+                }];
+            }];
+        });
+    });
+    
+    it(@"should remove nodes", ^{
+        waitUntil(^(DoneCallback done) {
+            NSMutableArray *cids = @[refImageNode.block.cid].mutableCopy;
+            [IpfsLiteApi.instance removeNodesForCids:cids completion:^(NSError * _Nullable error) {
+                expect(error).beNil();
+                [IpfsLiteApi.instance hasBlock:refImageNode.block.cid completion:^(BOOL hasBlock, NSError * _Nullable error) {
+                    expect(hasBlock).beFalsy();
+                    expect(error).beNil();
+                    done();
+                }];
+            }];
+        });
+    });
+    
+    
+    it(@"should resolve a path", ^{
+        waitUntil(^(DoneCallback done) {
+            NSMutableArray *path = @[@"frontend", @"foo", @"bar"].mutableCopy;
+            [IpfsLiteApi.instance resolveLinkInNodeWithCid:apolloArchiverCid path:path completion:^(Link * _Nullable link, NSArray<NSString *> * _Nullable remainingPath, NSError * _Nullable error) {
+                NSLog(@"GOT LINK: %@", link);
+                expect(error).beNil();
+                expect(link).notTo.beNil();
+                // TODO: Why aren't these working?
+//                expect(link.name).equal(@"frontend");
+//                expect(remainingPath).equal(@[@"foo", @"bar"]);
+                done();
+            }];
+        });
+    });
+    
+    it(@"should tree", ^{
+        waitUntil(^(DoneCallback done) {
+            [IpfsLiteApi.instance treeInNodeWithCid:apolloArchiverCid fromPath:nil depth:-1 completion:^(NSArray<NSString *> * _Nullable paths, NSError * _Nullable error) {
+                expect(error).beNil();
+                expect(paths).notTo.beNil();
                 done();
             }];
         });

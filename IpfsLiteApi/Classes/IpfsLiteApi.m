@@ -40,19 +40,15 @@ const int CHUNK_SIZE = 1024*32;
 
 - (void)addFileWithParams:(AddParams *)addParams input:(NSInputStream *)input completion:(void (^)(Node * _Nullable, NSError * _Nullable))completion {
     ResponseHandler<AddFileResponse *> *handler = [[ResponseHandler alloc] init];
+    __block AddFileResponse *response;
     handler.receive = ^(AddFileResponse *resp){
-        completion(resp.node, nil);
+        response = resp;
     };
     handler.close = ^(NSDictionary *metadata, NSError *error){
-        if (error) {
-            completion(nil, error);
-        }
+        completion(response.node, error);
     };
     
-    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
-    options.transportType = GRPCTransportTypeInsecure;
-    
-    GRPCStreamingProtoCall *call = [self.client addFileWithResponseHandler:handler callOptions:options];
+    GRPCStreamingProtoCall *call = [self.client addFileWithResponseHandler:handler callOptions:[self defaultCallOptions]];
     
     [call start];
     
@@ -87,19 +83,12 @@ const int CHUNK_SIZE = 1024*32;
         [data appendData:resp.chunk];
     };
     handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
-        if (error) {
-            completion(nil, error);
-        } else {
-            completion(data, nil);
-        }
+        completion(data, error);
     };
-    
-    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
-    options.transportType = GRPCTransportTypeInsecure;
     
     GetFileRequest *request = [[GetFileRequest alloc] init];
     [request setCid:cid];
-    GRPCUnaryProtoCall *call = [self.client getFileWithMessage:request responseHandler:handler callOptions:options];
+    GRPCUnaryProtoCall *call = [self.client getFileWithMessage:request responseHandler:handler callOptions:[self defaultCallOptions]];
     [call start];
 }
 
@@ -123,10 +112,7 @@ const int CHUNK_SIZE = 1024*32;
         completion(error);
     };
     
-    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
-    options.transportType = GRPCTransportTypeInsecure;
-    
-    GRPCUnaryProtoCall *call = [self.client getFileWithMessage:request responseHandler:handler callOptions:options];
+    GRPCUnaryProtoCall *call = [self.client getFileWithMessage:request responseHandler:handler callOptions:[self defaultCallOptions]];
     
     StreamHandler *sh = [[StreamHandler alloc] initWithOnBytes:^(NSStream * _Nonnull stream) {
     } onSpaceAvailable:^(NSStream * _Nonnull stream) {
@@ -151,29 +137,135 @@ const int CHUNK_SIZE = 1024*32;
     [call start];
 }
 
+- (void)hasBlock:(NSString *)cid completion:(void (^)(BOOL, NSError * _Nullable))completion {
+    HasBlockRequest *request = [[HasBlockRequest alloc] init];
+    [request setCid:cid];
+    ResponseHandler<HasBlockResponse *> *handler = [[ResponseHandler alloc] init];
+    __block HasBlockResponse *response;
+    handler.receive = ^(HasBlockResponse *resp) {
+        response = resp;
+    };
+    handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
+        completion(response.hasBlock, error);
+    };
+    GRPCUnaryProtoCall *call = [self.client hasBlockWithMessage:request responseHandler:handler callOptions:[self defaultCallOptions]];
+    [call start];
+}
+
 - (void)getNodeForCid:(NSString *)cid completion:(void (^)(Node * _Nullable, NSError * _Nullable))completion {
     GetNodeRequest *request = [[GetNodeRequest alloc] init];
     [request setCid:cid];
     
     ResponseHandler<GetNodeResponse *> *handler = [[ResponseHandler alloc] init];
+    __block GetNodeResponse *response;
     handler.receive = ^(GetNodeResponse *resp) {
-        completion(resp.node, nil);
+        response = resp;
     };
     handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
-        if (error) {
-            completion(nil, error);
-        }
+        completion(response.node, error);
     };
     
-    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
-    options.transportType = GRPCTransportTypeInsecure;
+    GRPCUnaryProtoCall *call = [self.client getNodeWithMessage:request responseHandler:handler callOptions:[self defaultCallOptions]];
+    [call start];
+}
+- (void)getNodesForCids:(NSMutableArray<NSString *> *)cids handler:(void (^)(BOOL, Node * _Nullable, NSError * _Nullable))handler {
+    GetNodesRequest *request = [[GetNodesRequest alloc] init];
+    [request setCidsArray:cids];
     
-    GRPCUnaryProtoCall *call = [self.client getNodeWithMessage:request responseHandler:handler callOptions:options];
+    ResponseHandler<GetNodesResponse *> *respHandler = [[ResponseHandler alloc] init];
+    respHandler.receive = ^(GetNodesResponse *resp) {
+        switch (resp.optionOneOfCase) {
+            case GetNodesResponse_Option_OneOfCase_Node:
+                handler(NO, resp.node, nil);
+                break;
+            case GetNodesResponse_Option_OneOfCase_Error: {
+                NSError *e = [NSError errorWithDomain:@"ipfs-lite" code:0 userInfo:@{NSLocalizedDescriptionKey : resp.error}];
+                handler(NO, nil, e);
+                break;
+            }
+            default:
+                break;
+        }
+    };
+    respHandler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
+        handler(YES, nil, error);
+    };
+    
+    GRPCUnaryProtoCall *call = [self.client getNodesWithMessage:request responseHandler:respHandler callOptions:[self defaultCallOptions]];
+    [call start];
+}
+
+- (void)removeNodeForCid:(NSString *)cid completion:(void (^)(NSError * _Nullable))completion {
+    RemoveNodeRequest *request = [[RemoveNodeRequest alloc] init];
+    [request setCid:cid];
+    
+    ResponseHandler<RemoveNodeResponse *> *handler = [[ResponseHandler alloc] init];
+    handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
+        completion(error);
+    };
+    
+    GRPCUnaryProtoCall *call = [self.client removeNodeWithMessage:request responseHandler:handler callOptions:[self defaultCallOptions]];
+    [call start];
+}
+
+- (void)removeNodesForCids:(NSMutableArray<NSString *> *)cids completion:(void (^)(NSError * _Nullable))completion {
+    RemoveNodesRequest *request = [[RemoveNodesRequest alloc] init];
+    [request setCidsArray:cids];
+    
+    ResponseHandler<RemoveNodesResponse *> *handler = [[ResponseHandler alloc] init];
+    handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
+        completion(error);
+    };
+    
+    GRPCUnaryProtoCall *call = [self.client removeNodesWithMessage:request responseHandler:handler callOptions:[self defaultCallOptions]];
+    [call start];
+}
+
+- (void)resolveLinkInNodeWithCid:(NSString *)cid path:(NSMutableArray<NSString *> *)path completion:(void (^)(Link * _Nullable, NSArray<NSString *> * _Nullable, NSError * _Nullable))completion {
+    ResolveLinkRequest *request = [[ResolveLinkRequest alloc] init];
+    [request setNodeCid:cid];
+    [request setPathArray:path];
+    
+    ResponseHandler<ResolveLinkResponse *> *handler = [[ResponseHandler alloc] init];
+    __block ResolveLinkResponse *response;
+    handler.receive = ^(ResolveLinkResponse *resp) {
+        response = resp;
+    };
+    handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
+        completion(response.link, response.remainingPathArray, error);
+    };
+    
+    GRPCUnaryProtoCall *call = [self.client resolveLinkWithMessage:request responseHandler:handler callOptions:[self defaultCallOptions]];
+    [call start];
+}
+
+- (void)treeInNodeWithCid:(NSString *)cid fromPath:(NSString *)path depth:(int)depth completion:(void (^)(NSArray<NSString *> * _Nullable, NSError * _Nullable))completion {
+    TreeRequest *request = [[TreeRequest alloc] init];
+    [request setNodeCid:cid];
+    [request setPath:path];
+    [request setDepth:depth];
+    
+    ResponseHandler<TreeResponse *> *handler = [[ResponseHandler alloc] init];
+    __block TreeResponse *response;
+    handler.receive = ^(TreeResponse *resp) {
+        response = resp;
+    };
+    handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
+        completion(response.pathsArray, error);
+    };
+    
+    GRPCUnaryProtoCall *call = [self.client treeWithMessage:request responseHandler:handler callOptions:[self defaultCallOptions]];
     [call start];
 }
 
 - (BOOL)stop:(NSError * _Nullable __autoreleasing *)error {
     return MobileStop(error);
+}
+
+- (GRPCMutableCallOptions *)defaultCallOptions {
+    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
+    options.transportType = GRPCTransportTypeInsecure;
+    return options;
 }
 
 - (void)bindStreamHandler:(StreamHandler *)streamHandler toStream:(NSStream *)stream {
