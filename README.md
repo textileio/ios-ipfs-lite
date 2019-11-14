@@ -41,15 +41,15 @@ IPFS Lite runs the minimal setup required to provide a DAG service. It is a port
 - [x] Stop IPFS Lite
 - [x] `addFileWithParams:input:completion:` Add data via `NSInputStream`.
 - [x] `getFileWithCid:completion:` Asynchronously get file by content address.
-- [x] `getNodeForCid:(NSString *)cid completion:` Asynchronously get an IPLD node from IPFS.
-- [ ] `hasBlock` Query if the local peer has the specified block
+- [x] `getNodeForCid:completion:` Asynchronously get an IPLD node from IPFS.
+- [x] `getNodesForCids:completion:` Get multiple IPLD nodes.
+- [x] `hasBlock:completion:` Query if the local peer has the specified block
+- [x] `removeNodeForCid:completion:` Remove an IPLD node.
+- [x] `removeNodesForCids:completion:` Remove multiple IPLD nodes.
+- [x] `resolveLinkInNodeWithCid:path:completion:` Resolve a link though a path in an IPLD node.
+- [x] `treeInNodeWithCid:fromPath:depth:completion:` List all data paths in an IPLD node.
 - [ ] `addNode` And an IPLD node.
 - [ ] `addNodes` And multiple IPLD nodes.
-- [ ] `getNodes` Get multiple IPLD nodes.
-- [ ] `removeNode` Remove an IPLD node.
-- [ ] `removeNodes` Remove multiple IPLD nodes.
-- [ ] `resolveLink` Resolve a link though a path in an IPLD node.
-- [ ] `tree` List all data paths in an IPLD node.
 
 
 ## Install
