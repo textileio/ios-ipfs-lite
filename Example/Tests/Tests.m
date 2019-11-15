@@ -49,8 +49,7 @@ describe(@"test the api", ^{
             [IpfsLiteApi.instance getFileWithCid:refTextNode.block.cid completion:^(NSData * _Nullable data, NSError * _Nullable error) {
                 expect(error).beNil();
                 expect(data).notTo.beNil();
-                NSString *result = [NSString stringWithUTF8String:[data bytes]];
-                expect(result).equal(@"Hello there\n");
+                expect([[NSString alloc] initWithBytes:data.bytes length:data.length encoding:NSUTF8StringEncoding]).equal(@"Hello there\n");
                 done();
             }];
         });
@@ -133,7 +132,6 @@ describe(@"test the api", ^{
             }];
         });
     });
-    
     
     it(@"should resolve a path", ^{
         waitUntil(^(DoneCallback done) {

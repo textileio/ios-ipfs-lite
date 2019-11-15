@@ -77,19 +77,11 @@ const int CHUNK_SIZE = 1024*32;
 }
 
 - (void)getFileWithCid:(NSString *)cid completion:(void (^)(NSData * _Nullable, NSError * _Nullable))completion {
-    NSMutableData *data = [[NSMutableData alloc] init];
-    ResponseHandler<GetFileResponse *> *handler = [[ResponseHandler alloc] init];
-    handler.receive = ^(GetFileResponse *resp) {
-        [data appendData:resp.chunk];
-    };
-    handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
+    NSOutputStream *output = [NSOutputStream outputStreamToMemory];
+    [self getFileWithCid:cid toOutput:output completion:^(NSError * _Nullable error) {
+        NSData *data = [output propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
         completion(data, error);
-    };
-    
-    GetFileRequest *request = [[GetFileRequest alloc] init];
-    [request setCid:cid];
-    GRPCUnaryProtoCall *call = [self.client getFileWithMessage:request responseHandler:handler callOptions:[self defaultCallOptions]];
-    [call start];
+    }];
 }
 
 - (void)getFileWithCid:(NSString *)cid toOutput:(NSOutputStream *)output completion:(void (^)(NSError * _Nullable))completion {

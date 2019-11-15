@@ -40,7 +40,7 @@
 //            }
 //            NSLog(@"complete");
 //            NSData *data = [output propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
-////            NSString *val = [NSString stringWithUTF8String:[data bytes]];
+////            NSString *val = [[NSString alloc] initWithBytes:data.bytes length:data.length encoding:NSUTF8StringEncoding];
 ////            NSLog(@"VALUE = %@", val);
 //            UIImage *image = [UIImage imageWithData:data];
 //            NSLog(@"COOOL");
