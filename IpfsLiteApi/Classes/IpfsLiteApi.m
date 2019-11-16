@@ -27,7 +27,7 @@ const int CHUNK_SIZE = 1024*32;
         return started;
     }
     NSString *host = [NSString stringWithFormat:@"localhost:%ld", port];
-    IpfsLiteApi.instance.client = [[IpfsLite alloc] initWithHost:host];
+    IpfsLiteApi.instance.client = [[TTEIpfsLite alloc] initWithHost:host];
     return YES;
 }
 
@@ -38,26 +38,22 @@ const int CHUNK_SIZE = 1024*32;
     return self;
 }
 
-- (void)addFileWithParams:(AddParams *)addParams input:(NSInputStream *)input completion:(void (^)(Node * _Nullable, NSError * _Nullable))completion {
-    ResponseHandler<AddFileResponse *> *handler = [[ResponseHandler alloc] init];
-    handler.receive = ^(AddFileResponse *resp){
-        completion(resp.node, nil);
+- (void)addFileFromInput:(NSInputStream *)input params:(TTEAddParams *)params completion:(void (^)(TTENode * _Nullable, NSError * _Nullable))completion {
+    ResponseHandler<TTEAddFileResponse *> *handler = [[ResponseHandler alloc] init];
+    __block TTEAddFileResponse *response;
+    handler.receive = ^(TTEAddFileResponse *resp){
+        response = resp;
     };
     handler.close = ^(NSDictionary *metadata, NSError *error){
-        if (error) {
-            completion(nil, error);
-        }
+        completion(response.node, error);
     };
     
-    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
-    options.transportType = GRPCTransportTypeInsecure;
-    
-    GRPCStreamingProtoCall *call = [self.client addFileWithResponseHandler:handler callOptions:options];
+    GRPCStreamingProtoCall *call = [self.client addFileWithResponseHandler:handler callOptions:[self defaultCallOptions]];
     
     [call start];
     
-    AddFileRequest *request = [[AddFileRequest alloc] init];
-    [request setAddParams:addParams];
+    TTEAddFileRequest *request = [[TTEAddFileRequest alloc] init];
+    [request setAddParams:params];
     [call writeMessage:request];
     
     StreamHandler *sh = [[StreamHandler alloc] initWithOnBytes:^(NSStream * _Nonnull stream) {
@@ -81,37 +77,22 @@ const int CHUNK_SIZE = 1024*32;
 }
 
 - (void)getFileWithCid:(NSString *)cid completion:(void (^)(NSData * _Nullable, NSError * _Nullable))completion {
-    NSMutableData *data = [[NSMutableData alloc] init];
-    ResponseHandler<GetFileResponse *> *handler = [[ResponseHandler alloc] init];
-    handler.receive = ^(GetFileResponse *resp) {
-        [data appendData:resp.chunk];
-    };
-    handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
-        if (error) {
-            completion(nil, error);
-        } else {
-            completion(data, nil);
-        }
-    };
-    
-    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
-    options.transportType = GRPCTransportTypeInsecure;
-    
-    GetFileRequest *request = [[GetFileRequest alloc] init];
-    [request setCid:cid];
-    GRPCUnaryProtoCall *call = [self.client getFileWithMessage:request responseHandler:handler callOptions:options];
-    [call start];
+    NSOutputStream *output = [NSOutputStream outputStreamToMemory];
+    [self getFileToOutput:output cid:cid completion:^(NSError * _Nullable error) {
+        NSData *data = [output propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
+        completion(data, error);
+    }];
 }
 
-- (void)getFileWithCid:(NSString *)cid toOutput:(NSOutputStream *)output completion:(void (^)(NSError * _Nullable))completion {
-    NSMutableArray<GetFileResponse *> *queue = [[NSMutableArray alloc] init];
+- (void)getFileToOutput:(NSOutputStream *)output cid:(NSString *)cid completion:(void (^)(NSError * _Nullable))completion {
+    NSMutableArray<TTEGetFileResponse *> *queue = [[NSMutableArray alloc] init];
     __block BOOL shouldWriteDirect = NO;
     
-    GetFileRequest *request = [[GetFileRequest alloc] init];
+    TTEGetFileRequest *request = [[TTEGetFileRequest alloc] init];
     [request setCid:cid];
     
-    ResponseHandler<GetFileResponse *> *handler = [[ResponseHandler alloc] init];
-    handler.receive = ^(GetFileResponse *resp){
+    ResponseHandler<TTEGetFileResponse *> *handler = [[ResponseHandler alloc] init];
+    handler.receive = ^(TTEGetFileResponse *resp){
         if (shouldWriteDirect) {
             [output write:[resp.chunk bytes] maxLength:[resp.chunk length]];
         } else {
@@ -123,14 +104,11 @@ const int CHUNK_SIZE = 1024*32;
         completion(error);
     };
     
-    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
-    options.transportType = GRPCTransportTypeInsecure;
-    
-    GRPCUnaryProtoCall *call = [self.client getFileWithMessage:request responseHandler:handler callOptions:options];
+    GRPCUnaryProtoCall *call = [self.client getFileWithMessage:request responseHandler:handler callOptions:[self defaultCallOptions]];
     
     StreamHandler *sh = [[StreamHandler alloc] initWithOnBytes:^(NSStream * _Nonnull stream) {
     } onSpaceAvailable:^(NSStream * _Nonnull stream) {
-        GetFileResponse *item = [queue firstObject];
+        TTEGetFileResponse *item = [queue firstObject];
         if (item) {
             shouldWriteDirect = NO;
             [queue removeObjectAtIndex:0];
@@ -151,29 +129,135 @@ const int CHUNK_SIZE = 1024*32;
     [call start];
 }
 
-- (void)getNodeForCid:(NSString *)cid completion:(void (^)(Node * _Nullable, NSError * _Nullable))completion {
-    GetNodeRequest *request = [[GetNodeRequest alloc] init];
+- (void)hasBlock:(NSString *)cid completion:(void (^)(BOOL, NSError * _Nullable))completion {
+    TTEHasBlockRequest *request = [[TTEHasBlockRequest alloc] init];
     [request setCid:cid];
-    
-    ResponseHandler<GetNodeResponse *> *handler = [[ResponseHandler alloc] init];
-    handler.receive = ^(GetNodeResponse *resp) {
-        completion(resp.node, nil);
+    ResponseHandler<TTEHasBlockResponse *> *handler = [[ResponseHandler alloc] init];
+    __block TTEHasBlockResponse *response;
+    handler.receive = ^(TTEHasBlockResponse *resp) {
+        response = resp;
     };
     handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
-        if (error) {
-            completion(nil, error);
-        }
+        completion(response.hasBlock, error);
+    };
+    GRPCUnaryProtoCall *call = [self.client hasBlockWithMessage:request responseHandler:handler callOptions:[self defaultCallOptions]];
+    [call start];
+}
+
+- (void)getNodeForCid:(NSString *)cid completion:(void (^)(TTENode * _Nullable, NSError * _Nullable))completion {
+    TTEGetNodeRequest *request = [[TTEGetNodeRequest alloc] init];
+    [request setCid:cid];
+    
+    ResponseHandler<TTEGetNodeResponse *> *handler = [[ResponseHandler alloc] init];
+    __block TTEGetNodeResponse *response;
+    handler.receive = ^(TTEGetNodeResponse *resp) {
+        response = resp;
+    };
+    handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
+        completion(response.node, error);
     };
     
-    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
-    options.transportType = GRPCTransportTypeInsecure;
+    GRPCUnaryProtoCall *call = [self.client getNodeWithMessage:request responseHandler:handler callOptions:[self defaultCallOptions]];
+    [call start];
+}
+- (void)getNodesForCids:(NSMutableArray<NSString *> *)cids handler:(void (^)(BOOL, TTENode * _Nullable, NSError * _Nullable))handler {
+    TTEGetNodesRequest *request = [[TTEGetNodesRequest alloc] init];
+    [request setCidsArray:cids];
     
-    GRPCUnaryProtoCall *call = [self.client getNodeWithMessage:request responseHandler:handler callOptions:options];
+    ResponseHandler<TTEGetNodesResponse *> *respHandler = [[ResponseHandler alloc] init];
+    respHandler.receive = ^(TTEGetNodesResponse *resp) {
+        switch (resp.optionOneOfCase) {
+            case TTEGetNodesResponse_Option_OneOfCase_Node:
+                handler(NO, resp.node, nil);
+                break;
+            case TTEGetNodesResponse_Option_OneOfCase_Error: {
+                NSError *e = [NSError errorWithDomain:@"ipfs-lite" code:0 userInfo:@{NSLocalizedDescriptionKey : resp.error}];
+                handler(NO, nil, e);
+                break;
+            }
+            default:
+                break;
+        }
+    };
+    respHandler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
+        handler(YES, nil, error);
+    };
+    
+    GRPCUnaryProtoCall *call = [self.client getNodesWithMessage:request responseHandler:respHandler callOptions:[self defaultCallOptions]];
+    [call start];
+}
+
+- (void)removeNodeForCid:(NSString *)cid completion:(void (^)(NSError * _Nullable))completion {
+    TTERemoveNodeRequest *request = [[TTERemoveNodeRequest alloc] init];
+    [request setCid:cid];
+    
+    ResponseHandler<TTERemoveNodeResponse *> *handler = [[ResponseHandler alloc] init];
+    handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
+        completion(error);
+    };
+    
+    GRPCUnaryProtoCall *call = [self.client removeNodeWithMessage:request responseHandler:handler callOptions:[self defaultCallOptions]];
+    [call start];
+}
+
+- (void)removeNodesForCids:(NSMutableArray<NSString *> *)cids completion:(void (^)(NSError * _Nullable))completion {
+    TTERemoveNodesRequest *request = [[TTERemoveNodesRequest alloc] init];
+    [request setCidsArray:cids];
+    
+    ResponseHandler<TTERemoveNodesResponse *> *handler = [[ResponseHandler alloc] init];
+    handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
+        completion(error);
+    };
+    
+    GRPCUnaryProtoCall *call = [self.client removeNodesWithMessage:request responseHandler:handler callOptions:[self defaultCallOptions]];
+    [call start];
+}
+
+- (void)resolveLinkInNodeWithCid:(NSString *)cid path:(NSMutableArray<NSString *> *)path completion:(void (^)(TTELink * _Nullable, NSArray<NSString *> * _Nullable, NSError * _Nullable))completion {
+    TTEResolveLinkRequest *request = [[TTEResolveLinkRequest alloc] init];
+    [request setNodeCid:cid];
+    [request setPathArray:path];
+    
+    ResponseHandler<TTEResolveLinkResponse *> *handler = [[ResponseHandler alloc] init];
+    __block TTEResolveLinkResponse *response;
+    handler.receive = ^(TTEResolveLinkResponse *resp) {
+        response = resp;
+    };
+    handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
+        completion(response.link, response.remainingPathArray, error);
+    };
+    
+    GRPCUnaryProtoCall *call = [self.client resolveLinkWithMessage:request responseHandler:handler callOptions:[self defaultCallOptions]];
+    [call start];
+}
+
+- (void)treeInNodeWithCid:(NSString *)cid fromPath:(NSString *)path depth:(int)depth completion:(void (^)(NSArray<NSString *> * _Nullable, NSError * _Nullable))completion {
+    TTETreeRequest *request = [[TTETreeRequest alloc] init];
+    [request setNodeCid:cid];
+    [request setPath:path];
+    [request setDepth:depth];
+    
+    ResponseHandler<TTETreeResponse *> *handler = [[ResponseHandler alloc] init];
+    __block TTETreeResponse *response;
+    handler.receive = ^(TTETreeResponse *resp) {
+        response = resp;
+    };
+    handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
+        completion(response.pathsArray, error);
+    };
+    
+    GRPCUnaryProtoCall *call = [self.client treeWithMessage:request responseHandler:handler callOptions:[self defaultCallOptions]];
     [call start];
 }
 
 - (BOOL)stop:(NSError * _Nullable __autoreleasing *)error {
     return MobileStop(error);
+}
+
+- (GRPCMutableCallOptions *)defaultCallOptions {
+    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
+    options.transportType = GRPCTransportTypeInsecure;
+    return options;
 }
 
 - (void)bindStreamHandler:(StreamHandler *)streamHandler toStream:(NSStream *)stream {

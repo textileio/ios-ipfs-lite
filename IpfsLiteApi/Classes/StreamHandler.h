@@ -1,10 +1,3 @@
-//
-//  StreamHandler.h
-//  Pods
-//
-//  Created by Aaron Sutula on 11/13/19.
-//
-
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN

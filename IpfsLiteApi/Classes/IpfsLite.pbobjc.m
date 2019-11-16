@@ -20,32 +20,33 @@
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 #pragma clang diagnostic ignored "-Wdirect-ivar-access"
 
-#pragma mark - IpfsLiteRoot
+#pragma mark - TTEIpfsLiteRoot
 
-@implementation IpfsLiteRoot
+@implementation TTEIpfsLiteRoot
 
 // No extensions in the file and no imports, so no need to generate
 // +extensionRegistry.
 
 @end
 
-#pragma mark - IpfsLiteRoot_FileDescriptor
+#pragma mark - TTEIpfsLiteRoot_FileDescriptor
 
-static GPBFileDescriptor *IpfsLiteRoot_FileDescriptor(void) {
+static GPBFileDescriptor *TTEIpfsLiteRoot_FileDescriptor(void) {
   // This is called by +initialize so there is no need to worry
   // about thread safety of the singleton.
   static GPBFileDescriptor *descriptor = NULL;
   if (!descriptor) {
     GPB_DEBUG_CHECK_RUNTIME_VERSIONS();
-    descriptor = [[GPBFileDescriptor alloc] initWithPackage:@""
+    descriptor = [[GPBFileDescriptor alloc] initWithPackage:@"ipfs_lite"
+                                                 objcPrefix:@"TTE"
                                                      syntax:GPBFileSyntaxProto3];
   }
   return descriptor;
 }
 
-#pragma mark - AddParams
+#pragma mark - TTEAddParams
 
-@implementation AddParams
+@implementation TTEAddParams
 
 @dynamic layout;
 @dynamic chunker;
@@ -55,12 +56,12 @@ static GPBFileDescriptor *IpfsLiteRoot_FileDescriptor(void) {
 @dynamic noCopy;
 @dynamic hashFun;
 
-typedef struct AddParams__storage_ {
+typedef struct TTEAddParams__storage_ {
   uint32_t _has_storage_[1];
   NSString *layout;
   NSString *chunker;
   NSString *hashFun;
-} AddParams__storage_;
+} TTEAddParams__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -71,25 +72,25 @@ typedef struct AddParams__storage_ {
       {
         .name = "layout",
         .dataTypeSpecific.className = NULL,
-        .number = AddParams_FieldNumber_Layout,
+        .number = TTEAddParams_FieldNumber_Layout,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(AddParams__storage_, layout),
+        .offset = (uint32_t)offsetof(TTEAddParams__storage_, layout),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "chunker",
         .dataTypeSpecific.className = NULL,
-        .number = AddParams_FieldNumber_Chunker,
+        .number = TTEAddParams_FieldNumber_Chunker,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(AddParams__storage_, chunker),
+        .offset = (uint32_t)offsetof(TTEAddParams__storage_, chunker),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "rawLeaves",
         .dataTypeSpecific.className = NULL,
-        .number = AddParams_FieldNumber_RawLeaves,
+        .number = TTEAddParams_FieldNumber_RawLeaves,
         .hasIndex = 2,
         .offset = 3,  // Stored in _has_storage_ to save space.
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
@@ -98,7 +99,7 @@ typedef struct AddParams__storage_ {
       {
         .name = "hidden",
         .dataTypeSpecific.className = NULL,
-        .number = AddParams_FieldNumber_Hidden,
+        .number = TTEAddParams_FieldNumber_Hidden,
         .hasIndex = 4,
         .offset = 5,  // Stored in _has_storage_ to save space.
         .flags = GPBFieldOptional,
@@ -107,7 +108,7 @@ typedef struct AddParams__storage_ {
       {
         .name = "shared",
         .dataTypeSpecific.className = NULL,
-        .number = AddParams_FieldNumber_Shared,
+        .number = TTEAddParams_FieldNumber_Shared,
         .hasIndex = 6,
         .offset = 7,  // Stored in _has_storage_ to save space.
         .flags = GPBFieldOptional,
@@ -116,7 +117,7 @@ typedef struct AddParams__storage_ {
       {
         .name = "noCopy",
         .dataTypeSpecific.className = NULL,
-        .number = AddParams_FieldNumber_NoCopy,
+        .number = TTEAddParams_FieldNumber_NoCopy,
         .hasIndex = 8,
         .offset = 9,  // Stored in _has_storage_ to save space.
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
@@ -125,20 +126,20 @@ typedef struct AddParams__storage_ {
       {
         .name = "hashFun",
         .dataTypeSpecific.className = NULL,
-        .number = AddParams_FieldNumber_HashFun,
+        .number = TTEAddParams_FieldNumber_HashFun,
         .hasIndex = 10,
-        .offset = (uint32_t)offsetof(AddParams__storage_, hashFun),
+        .offset = (uint32_t)offsetof(TTEAddParams__storage_, hashFun),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[AddParams class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEAddParams class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(AddParams__storage_)
+                                   storageSize:sizeof(TTEAddParams__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
@@ -155,18 +156,18 @@ typedef struct AddParams__storage_ {
 
 @end
 
-#pragma mark - Block
+#pragma mark - TTEBlock
 
-@implementation Block
+@implementation TTEBlock
 
 @dynamic rawData;
 @dynamic cid;
 
-typedef struct Block__storage_ {
+typedef struct TTEBlock__storage_ {
   uint32_t _has_storage_[1];
   NSData *rawData;
   NSString *cid;
-} Block__storage_;
+} TTEBlock__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -177,29 +178,29 @@ typedef struct Block__storage_ {
       {
         .name = "rawData",
         .dataTypeSpecific.className = NULL,
-        .number = Block_FieldNumber_RawData,
+        .number = TTEBlock_FieldNumber_RawData,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(Block__storage_, rawData),
+        .offset = (uint32_t)offsetof(TTEBlock__storage_, rawData),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeBytes,
       },
       {
         .name = "cid",
         .dataTypeSpecific.className = NULL,
-        .number = Block_FieldNumber_Cid,
+        .number = TTEBlock_FieldNumber_Cid,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(Block__storage_, cid),
+        .offset = (uint32_t)offsetof(TTEBlock__storage_, cid),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[Block class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEBlock class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(Block__storage_)
+                                   storageSize:sizeof(TTEBlock__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
@@ -216,20 +217,20 @@ typedef struct Block__storage_ {
 
 @end
 
-#pragma mark - Link
+#pragma mark - TTELink
 
-@implementation Link
+@implementation TTELink
 
 @dynamic name;
 @dynamic size;
 @dynamic cid;
 
-typedef struct Link__storage_ {
+typedef struct TTELink__storage_ {
   uint32_t _has_storage_[1];
   NSString *name;
   NSString *cid;
   int64_t size;
-} Link__storage_;
+} TTELink__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -240,38 +241,38 @@ typedef struct Link__storage_ {
       {
         .name = "name",
         .dataTypeSpecific.className = NULL,
-        .number = Link_FieldNumber_Name,
+        .number = TTELink_FieldNumber_Name,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(Link__storage_, name),
+        .offset = (uint32_t)offsetof(TTELink__storage_, name),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "size",
         .dataTypeSpecific.className = NULL,
-        .number = Link_FieldNumber_Size,
+        .number = TTELink_FieldNumber_Size,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(Link__storage_, size),
+        .offset = (uint32_t)offsetof(TTELink__storage_, size),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt64,
       },
       {
         .name = "cid",
         .dataTypeSpecific.className = NULL,
-        .number = Link_FieldNumber_Cid,
+        .number = TTELink_FieldNumber_Cid,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(Link__storage_, cid),
+        .offset = (uint32_t)offsetof(TTELink__storage_, cid),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[Link class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTELink class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(Link__storage_)
+                                   storageSize:sizeof(TTELink__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -283,9 +284,9 @@ typedef struct Link__storage_ {
 
 @end
 
-#pragma mark - NodeStat
+#pragma mark - TTENodeStat
 
-@implementation NodeStat
+@implementation TTENodeStat
 
 @dynamic hash_p;
 @dynamic numLinks;
@@ -294,7 +295,7 @@ typedef struct Link__storage_ {
 @dynamic dataSize;
 @dynamic cumulativeSize;
 
-typedef struct NodeStat__storage_ {
+typedef struct TTENodeStat__storage_ {
   uint32_t _has_storage_[1];
   int32_t numLinks;
   int32_t blockSize;
@@ -302,7 +303,7 @@ typedef struct NodeStat__storage_ {
   int32_t dataSize;
   int32_t cumulativeSize;
   NSString *hash_p;
-} NodeStat__storage_;
+} TTENodeStat__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -313,65 +314,65 @@ typedef struct NodeStat__storage_ {
       {
         .name = "hash_p",
         .dataTypeSpecific.className = NULL,
-        .number = NodeStat_FieldNumber_Hash_p,
+        .number = TTENodeStat_FieldNumber_Hash_p,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(NodeStat__storage_, hash_p),
+        .offset = (uint32_t)offsetof(TTENodeStat__storage_, hash_p),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "numLinks",
         .dataTypeSpecific.className = NULL,
-        .number = NodeStat_FieldNumber_NumLinks,
+        .number = TTENodeStat_FieldNumber_NumLinks,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(NodeStat__storage_, numLinks),
+        .offset = (uint32_t)offsetof(TTENodeStat__storage_, numLinks),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeInt32,
       },
       {
         .name = "blockSize",
         .dataTypeSpecific.className = NULL,
-        .number = NodeStat_FieldNumber_BlockSize,
+        .number = TTENodeStat_FieldNumber_BlockSize,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(NodeStat__storage_, blockSize),
+        .offset = (uint32_t)offsetof(TTENodeStat__storage_, blockSize),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeInt32,
       },
       {
         .name = "linksSize",
         .dataTypeSpecific.className = NULL,
-        .number = NodeStat_FieldNumber_LinksSize,
+        .number = TTENodeStat_FieldNumber_LinksSize,
         .hasIndex = 3,
-        .offset = (uint32_t)offsetof(NodeStat__storage_, linksSize),
+        .offset = (uint32_t)offsetof(TTENodeStat__storage_, linksSize),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeInt32,
       },
       {
         .name = "dataSize",
         .dataTypeSpecific.className = NULL,
-        .number = NodeStat_FieldNumber_DataSize,
+        .number = TTENodeStat_FieldNumber_DataSize,
         .hasIndex = 4,
-        .offset = (uint32_t)offsetof(NodeStat__storage_, dataSize),
+        .offset = (uint32_t)offsetof(TTENodeStat__storage_, dataSize),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeInt32,
       },
       {
         .name = "cumulativeSize",
         .dataTypeSpecific.className = NULL,
-        .number = NodeStat_FieldNumber_CumulativeSize,
+        .number = TTENodeStat_FieldNumber_CumulativeSize,
         .hasIndex = 5,
-        .offset = (uint32_t)offsetof(NodeStat__storage_, cumulativeSize),
+        .offset = (uint32_t)offsetof(TTENodeStat__storage_, cumulativeSize),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeInt32,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[NodeStat class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTENodeStat class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(NodeStat__storage_)
+                                   storageSize:sizeof(TTENodeStat__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
@@ -388,22 +389,22 @@ typedef struct NodeStat__storage_ {
 
 @end
 
-#pragma mark - Node
+#pragma mark - TTENode
 
-@implementation Node
+@implementation TTENode
 
 @dynamic hasBlock, block;
 @dynamic linksArray, linksArray_Count;
 @dynamic hasStat, stat;
 @dynamic size;
 
-typedef struct Node__storage_ {
+typedef struct TTENode__storage_ {
   uint32_t _has_storage_[1];
-  Block *block;
+  TTEBlock *block;
   NSMutableArray *linksArray;
-  NodeStat *stat;
+  TTENodeStat *stat;
   int64_t size;
-} Node__storage_;
+} TTENode__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -413,48 +414,48 @@ typedef struct Node__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "block",
-        .dataTypeSpecific.className = GPBStringifySymbol(Block),
-        .number = Node_FieldNumber_Block,
+        .dataTypeSpecific.className = GPBStringifySymbol(TTEBlock),
+        .number = TTENode_FieldNumber_Block,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(Node__storage_, block),
+        .offset = (uint32_t)offsetof(TTENode__storage_, block),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "linksArray",
-        .dataTypeSpecific.className = GPBStringifySymbol(Link),
-        .number = Node_FieldNumber_LinksArray,
+        .dataTypeSpecific.className = GPBStringifySymbol(TTELink),
+        .number = TTENode_FieldNumber_LinksArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(Node__storage_, linksArray),
+        .offset = (uint32_t)offsetof(TTENode__storage_, linksArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "stat",
-        .dataTypeSpecific.className = GPBStringifySymbol(NodeStat),
-        .number = Node_FieldNumber_Stat,
+        .dataTypeSpecific.className = GPBStringifySymbol(TTENodeStat),
+        .number = TTENode_FieldNumber_Stat,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(Node__storage_, stat),
+        .offset = (uint32_t)offsetof(TTENode__storage_, stat),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "size",
         .dataTypeSpecific.className = NULL,
-        .number = Node_FieldNumber_Size,
+        .number = TTENode_FieldNumber_Size,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(Node__storage_, size),
+        .offset = (uint32_t)offsetof(TTENode__storage_, size),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt64,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[Node class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTENode class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(Node__storage_)
+                                   storageSize:sizeof(TTENode__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -466,19 +467,19 @@ typedef struct Node__storage_ {
 
 @end
 
-#pragma mark - AddFileRequest
+#pragma mark - TTEAddFileRequest
 
-@implementation AddFileRequest
+@implementation TTEAddFileRequest
 
 @dynamic payloadOneOfCase;
 @dynamic addParams;
 @dynamic chunk;
 
-typedef struct AddFileRequest__storage_ {
+typedef struct TTEAddFileRequest__storage_ {
   uint32_t _has_storage_[2];
-  AddParams *addParams;
+  TTEAddParams *addParams;
   NSData *chunk;
-} AddFileRequest__storage_;
+} TTEAddFileRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -488,30 +489,30 @@ typedef struct AddFileRequest__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "addParams",
-        .dataTypeSpecific.className = GPBStringifySymbol(AddParams),
-        .number = AddFileRequest_FieldNumber_AddParams,
+        .dataTypeSpecific.className = GPBStringifySymbol(TTEAddParams),
+        .number = TTEAddFileRequest_FieldNumber_AddParams,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(AddFileRequest__storage_, addParams),
+        .offset = (uint32_t)offsetof(TTEAddFileRequest__storage_, addParams),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "chunk",
         .dataTypeSpecific.className = NULL,
-        .number = AddFileRequest_FieldNumber_Chunk,
+        .number = TTEAddFileRequest_FieldNumber_Chunk,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(AddFileRequest__storage_, chunk),
+        .offset = (uint32_t)offsetof(TTEAddFileRequest__storage_, chunk),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBytes,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[AddFileRequest class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEAddFileRequest class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(AddFileRequest__storage_)
+                                   storageSize:sizeof(TTEAddFileRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     static const char *oneofs[] = {
       "payload",
@@ -534,21 +535,21 @@ typedef struct AddFileRequest__storage_ {
 
 @end
 
-void AddFileRequest_ClearPayloadOneOfCase(AddFileRequest *message) {
+void TTEAddFileRequest_ClearPayloadOneOfCase(TTEAddFileRequest *message) {
   GPBDescriptor *descriptor = [message descriptor];
   GPBOneofDescriptor *oneof = [descriptor.oneofs objectAtIndex:0];
   GPBMaybeClearOneof(message, oneof, -1, 0);
 }
-#pragma mark - AddFileResponse
+#pragma mark - TTEAddFileResponse
 
-@implementation AddFileResponse
+@implementation TTEAddFileResponse
 
 @dynamic hasNode, node;
 
-typedef struct AddFileResponse__storage_ {
+typedef struct TTEAddFileResponse__storage_ {
   uint32_t _has_storage_[1];
-  Node *node;
-} AddFileResponse__storage_;
+  TTENode *node;
+} TTEAddFileResponse__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -558,21 +559,21 @@ typedef struct AddFileResponse__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "node",
-        .dataTypeSpecific.className = GPBStringifySymbol(Node),
-        .number = AddFileResponse_FieldNumber_Node,
+        .dataTypeSpecific.className = GPBStringifySymbol(TTENode),
+        .number = TTEAddFileResponse_FieldNumber_Node,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(AddFileResponse__storage_, node),
+        .offset = (uint32_t)offsetof(TTEAddFileResponse__storage_, node),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[AddFileResponse class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEAddFileResponse class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(AddFileResponse__storage_)
+                                   storageSize:sizeof(TTEAddFileResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -584,16 +585,16 @@ typedef struct AddFileResponse__storage_ {
 
 @end
 
-#pragma mark - GetFileRequest
+#pragma mark - TTEGetFileRequest
 
-@implementation GetFileRequest
+@implementation TTEGetFileRequest
 
 @dynamic cid;
 
-typedef struct GetFileRequest__storage_ {
+typedef struct TTEGetFileRequest__storage_ {
   uint32_t _has_storage_[1];
   NSString *cid;
-} GetFileRequest__storage_;
+} TTEGetFileRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -604,20 +605,20 @@ typedef struct GetFileRequest__storage_ {
       {
         .name = "cid",
         .dataTypeSpecific.className = NULL,
-        .number = GetFileRequest_FieldNumber_Cid,
+        .number = TTEGetFileRequest_FieldNumber_Cid,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(GetFileRequest__storage_, cid),
+        .offset = (uint32_t)offsetof(TTEGetFileRequest__storage_, cid),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[GetFileRequest class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEGetFileRequest class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(GetFileRequest__storage_)
+                                   storageSize:sizeof(TTEGetFileRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -629,16 +630,16 @@ typedef struct GetFileRequest__storage_ {
 
 @end
 
-#pragma mark - GetFileResponse
+#pragma mark - TTEGetFileResponse
 
-@implementation GetFileResponse
+@implementation TTEGetFileResponse
 
 @dynamic chunk;
 
-typedef struct GetFileResponse__storage_ {
+typedef struct TTEGetFileResponse__storage_ {
   uint32_t _has_storage_[1];
   NSData *chunk;
-} GetFileResponse__storage_;
+} TTEGetFileResponse__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -649,20 +650,20 @@ typedef struct GetFileResponse__storage_ {
       {
         .name = "chunk",
         .dataTypeSpecific.className = NULL,
-        .number = GetFileResponse_FieldNumber_Chunk,
+        .number = TTEGetFileResponse_FieldNumber_Chunk,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(GetFileResponse__storage_, chunk),
+        .offset = (uint32_t)offsetof(TTEGetFileResponse__storage_, chunk),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBytes,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[GetFileResponse class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEGetFileResponse class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(GetFileResponse__storage_)
+                                   storageSize:sizeof(TTEGetFileResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -674,16 +675,16 @@ typedef struct GetFileResponse__storage_ {
 
 @end
 
-#pragma mark - AddNodeRequest
+#pragma mark - TTEAddNodeRequest
 
-@implementation AddNodeRequest
+@implementation TTEAddNodeRequest
 
 @dynamic hasBlock, block;
 
-typedef struct AddNodeRequest__storage_ {
+typedef struct TTEAddNodeRequest__storage_ {
   uint32_t _has_storage_[1];
-  Block *block;
-} AddNodeRequest__storage_;
+  TTEBlock *block;
+} TTEAddNodeRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -693,21 +694,21 @@ typedef struct AddNodeRequest__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "block",
-        .dataTypeSpecific.className = GPBStringifySymbol(Block),
-        .number = AddNodeRequest_FieldNumber_Block,
+        .dataTypeSpecific.className = GPBStringifySymbol(TTEBlock),
+        .number = TTEAddNodeRequest_FieldNumber_Block,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(AddNodeRequest__storage_, block),
+        .offset = (uint32_t)offsetof(TTEAddNodeRequest__storage_, block),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[AddNodeRequest class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEAddNodeRequest class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(AddNodeRequest__storage_)
+                                   storageSize:sizeof(TTEAddNodeRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -719,14 +720,14 @@ typedef struct AddNodeRequest__storage_ {
 
 @end
 
-#pragma mark - AddNodeResponse
+#pragma mark - TTEAddNodeResponse
 
-@implementation AddNodeResponse
+@implementation TTEAddNodeResponse
 
 
-typedef struct AddNodeResponse__storage_ {
+typedef struct TTEAddNodeResponse__storage_ {
   uint32_t _has_storage_[1];
-} AddNodeResponse__storage_;
+} TTEAddNodeResponse__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -734,12 +735,12 @@ typedef struct AddNodeResponse__storage_ {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[AddNodeResponse class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEAddNodeResponse class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:NULL
                                     fieldCount:0
-                                   storageSize:sizeof(AddNodeResponse__storage_)
+                                   storageSize:sizeof(TTEAddNodeResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -751,16 +752,16 @@ typedef struct AddNodeResponse__storage_ {
 
 @end
 
-#pragma mark - AddNodesRequest
+#pragma mark - TTEAddNodesRequest
 
-@implementation AddNodesRequest
+@implementation TTEAddNodesRequest
 
 @dynamic blocksArray, blocksArray_Count;
 
-typedef struct AddNodesRequest__storage_ {
+typedef struct TTEAddNodesRequest__storage_ {
   uint32_t _has_storage_[1];
   NSMutableArray *blocksArray;
-} AddNodesRequest__storage_;
+} TTEAddNodesRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -770,21 +771,21 @@ typedef struct AddNodesRequest__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "blocksArray",
-        .dataTypeSpecific.className = GPBStringifySymbol(Block),
-        .number = AddNodesRequest_FieldNumber_BlocksArray,
+        .dataTypeSpecific.className = GPBStringifySymbol(TTEBlock),
+        .number = TTEAddNodesRequest_FieldNumber_BlocksArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(AddNodesRequest__storage_, blocksArray),
+        .offset = (uint32_t)offsetof(TTEAddNodesRequest__storage_, blocksArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[AddNodesRequest class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEAddNodesRequest class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(AddNodesRequest__storage_)
+                                   storageSize:sizeof(TTEAddNodesRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -796,14 +797,14 @@ typedef struct AddNodesRequest__storage_ {
 
 @end
 
-#pragma mark - AddNodesResponse
+#pragma mark - TTEAddNodesResponse
 
-@implementation AddNodesResponse
+@implementation TTEAddNodesResponse
 
 
-typedef struct AddNodesResponse__storage_ {
+typedef struct TTEAddNodesResponse__storage_ {
   uint32_t _has_storage_[1];
-} AddNodesResponse__storage_;
+} TTEAddNodesResponse__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -811,12 +812,12 @@ typedef struct AddNodesResponse__storage_ {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[AddNodesResponse class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEAddNodesResponse class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:NULL
                                     fieldCount:0
-                                   storageSize:sizeof(AddNodesResponse__storage_)
+                                   storageSize:sizeof(TTEAddNodesResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -828,16 +829,16 @@ typedef struct AddNodesResponse__storage_ {
 
 @end
 
-#pragma mark - GetNodeRequest
+#pragma mark - TTEGetNodeRequest
 
-@implementation GetNodeRequest
+@implementation TTEGetNodeRequest
 
 @dynamic cid;
 
-typedef struct GetNodeRequest__storage_ {
+typedef struct TTEGetNodeRequest__storage_ {
   uint32_t _has_storage_[1];
   NSString *cid;
-} GetNodeRequest__storage_;
+} TTEGetNodeRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -848,20 +849,20 @@ typedef struct GetNodeRequest__storage_ {
       {
         .name = "cid",
         .dataTypeSpecific.className = NULL,
-        .number = GetNodeRequest_FieldNumber_Cid,
+        .number = TTEGetNodeRequest_FieldNumber_Cid,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(GetNodeRequest__storage_, cid),
+        .offset = (uint32_t)offsetof(TTEGetNodeRequest__storage_, cid),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[GetNodeRequest class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEGetNodeRequest class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(GetNodeRequest__storage_)
+                                   storageSize:sizeof(TTEGetNodeRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -873,16 +874,16 @@ typedef struct GetNodeRequest__storage_ {
 
 @end
 
-#pragma mark - GetNodeResponse
+#pragma mark - TTEGetNodeResponse
 
-@implementation GetNodeResponse
+@implementation TTEGetNodeResponse
 
 @dynamic hasNode, node;
 
-typedef struct GetNodeResponse__storage_ {
+typedef struct TTEGetNodeResponse__storage_ {
   uint32_t _has_storage_[1];
-  Node *node;
-} GetNodeResponse__storage_;
+  TTENode *node;
+} TTEGetNodeResponse__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -892,21 +893,21 @@ typedef struct GetNodeResponse__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "node",
-        .dataTypeSpecific.className = GPBStringifySymbol(Node),
-        .number = GetNodeResponse_FieldNumber_Node,
+        .dataTypeSpecific.className = GPBStringifySymbol(TTENode),
+        .number = TTEGetNodeResponse_FieldNumber_Node,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(GetNodeResponse__storage_, node),
+        .offset = (uint32_t)offsetof(TTEGetNodeResponse__storage_, node),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[GetNodeResponse class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEGetNodeResponse class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(GetNodeResponse__storage_)
+                                   storageSize:sizeof(TTEGetNodeResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -918,16 +919,16 @@ typedef struct GetNodeResponse__storage_ {
 
 @end
 
-#pragma mark - GetNodesRequest
+#pragma mark - TTEGetNodesRequest
 
-@implementation GetNodesRequest
+@implementation TTEGetNodesRequest
 
 @dynamic cidsArray, cidsArray_Count;
 
-typedef struct GetNodesRequest__storage_ {
+typedef struct TTEGetNodesRequest__storage_ {
   uint32_t _has_storage_[1];
   NSMutableArray *cidsArray;
-} GetNodesRequest__storage_;
+} TTEGetNodesRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -938,20 +939,20 @@ typedef struct GetNodesRequest__storage_ {
       {
         .name = "cidsArray",
         .dataTypeSpecific.className = NULL,
-        .number = GetNodesRequest_FieldNumber_CidsArray,
+        .number = TTEGetNodesRequest_FieldNumber_CidsArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(GetNodesRequest__storage_, cidsArray),
+        .offset = (uint32_t)offsetof(TTEGetNodesRequest__storage_, cidsArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[GetNodesRequest class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEGetNodesRequest class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(GetNodesRequest__storage_)
+                                   storageSize:sizeof(TTEGetNodesRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -963,19 +964,19 @@ typedef struct GetNodesRequest__storage_ {
 
 @end
 
-#pragma mark - GetNodesResponse
+#pragma mark - TTEGetNodesResponse
 
-@implementation GetNodesResponse
+@implementation TTEGetNodesResponse
 
 @dynamic optionOneOfCase;
 @dynamic node;
 @dynamic error;
 
-typedef struct GetNodesResponse__storage_ {
+typedef struct TTEGetNodesResponse__storage_ {
   uint32_t _has_storage_[2];
-  Node *node;
+  TTENode *node;
   NSString *error;
-} GetNodesResponse__storage_;
+} TTEGetNodesResponse__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -985,30 +986,30 @@ typedef struct GetNodesResponse__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "node",
-        .dataTypeSpecific.className = GPBStringifySymbol(Node),
-        .number = GetNodesResponse_FieldNumber_Node,
+        .dataTypeSpecific.className = GPBStringifySymbol(TTENode),
+        .number = TTEGetNodesResponse_FieldNumber_Node,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(GetNodesResponse__storage_, node),
+        .offset = (uint32_t)offsetof(TTEGetNodesResponse__storage_, node),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "error",
         .dataTypeSpecific.className = NULL,
-        .number = GetNodesResponse_FieldNumber_Error,
+        .number = TTEGetNodesResponse_FieldNumber_Error,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(GetNodesResponse__storage_, error),
+        .offset = (uint32_t)offsetof(TTEGetNodesResponse__storage_, error),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[GetNodesResponse class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEGetNodesResponse class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(GetNodesResponse__storage_)
+                                   storageSize:sizeof(TTEGetNodesResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     static const char *oneofs[] = {
       "option",
@@ -1026,21 +1027,21 @@ typedef struct GetNodesResponse__storage_ {
 
 @end
 
-void GetNodesResponse_ClearOptionOneOfCase(GetNodesResponse *message) {
+void TTEGetNodesResponse_ClearOptionOneOfCase(TTEGetNodesResponse *message) {
   GPBDescriptor *descriptor = [message descriptor];
   GPBOneofDescriptor *oneof = [descriptor.oneofs objectAtIndex:0];
   GPBMaybeClearOneof(message, oneof, -1, 0);
 }
-#pragma mark - RemoveNodeRequest
+#pragma mark - TTERemoveNodeRequest
 
-@implementation RemoveNodeRequest
+@implementation TTERemoveNodeRequest
 
 @dynamic cid;
 
-typedef struct RemoveNodeRequest__storage_ {
+typedef struct TTERemoveNodeRequest__storage_ {
   uint32_t _has_storage_[1];
   NSString *cid;
-} RemoveNodeRequest__storage_;
+} TTERemoveNodeRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1051,20 +1052,20 @@ typedef struct RemoveNodeRequest__storage_ {
       {
         .name = "cid",
         .dataTypeSpecific.className = NULL,
-        .number = RemoveNodeRequest_FieldNumber_Cid,
+        .number = TTERemoveNodeRequest_FieldNumber_Cid,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(RemoveNodeRequest__storage_, cid),
+        .offset = (uint32_t)offsetof(TTERemoveNodeRequest__storage_, cid),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[RemoveNodeRequest class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTERemoveNodeRequest class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(RemoveNodeRequest__storage_)
+                                   storageSize:sizeof(TTERemoveNodeRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1076,14 +1077,14 @@ typedef struct RemoveNodeRequest__storage_ {
 
 @end
 
-#pragma mark - RemoveNodeResponse
+#pragma mark - TTERemoveNodeResponse
 
-@implementation RemoveNodeResponse
+@implementation TTERemoveNodeResponse
 
 
-typedef struct RemoveNodeResponse__storage_ {
+typedef struct TTERemoveNodeResponse__storage_ {
   uint32_t _has_storage_[1];
-} RemoveNodeResponse__storage_;
+} TTERemoveNodeResponse__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1091,12 +1092,12 @@ typedef struct RemoveNodeResponse__storage_ {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[RemoveNodeResponse class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTERemoveNodeResponse class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:NULL
                                     fieldCount:0
-                                   storageSize:sizeof(RemoveNodeResponse__storage_)
+                                   storageSize:sizeof(TTERemoveNodeResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1108,16 +1109,16 @@ typedef struct RemoveNodeResponse__storage_ {
 
 @end
 
-#pragma mark - RemoveNodesRequest
+#pragma mark - TTERemoveNodesRequest
 
-@implementation RemoveNodesRequest
+@implementation TTERemoveNodesRequest
 
 @dynamic cidsArray, cidsArray_Count;
 
-typedef struct RemoveNodesRequest__storage_ {
+typedef struct TTERemoveNodesRequest__storage_ {
   uint32_t _has_storage_[1];
   NSMutableArray *cidsArray;
-} RemoveNodesRequest__storage_;
+} TTERemoveNodesRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1128,20 +1129,20 @@ typedef struct RemoveNodesRequest__storage_ {
       {
         .name = "cidsArray",
         .dataTypeSpecific.className = NULL,
-        .number = RemoveNodesRequest_FieldNumber_CidsArray,
+        .number = TTERemoveNodesRequest_FieldNumber_CidsArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(RemoveNodesRequest__storage_, cidsArray),
+        .offset = (uint32_t)offsetof(TTERemoveNodesRequest__storage_, cidsArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[RemoveNodesRequest class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTERemoveNodesRequest class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(RemoveNodesRequest__storage_)
+                                   storageSize:sizeof(TTERemoveNodesRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1153,14 +1154,14 @@ typedef struct RemoveNodesRequest__storage_ {
 
 @end
 
-#pragma mark - RemoveNodesResponse
+#pragma mark - TTERemoveNodesResponse
 
-@implementation RemoveNodesResponse
+@implementation TTERemoveNodesResponse
 
 
-typedef struct RemoveNodesResponse__storage_ {
+typedef struct TTERemoveNodesResponse__storage_ {
   uint32_t _has_storage_[1];
-} RemoveNodesResponse__storage_;
+} TTERemoveNodesResponse__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1168,12 +1169,12 @@ typedef struct RemoveNodesResponse__storage_ {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[RemoveNodesResponse class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTERemoveNodesResponse class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:NULL
                                     fieldCount:0
-                                   storageSize:sizeof(RemoveNodesResponse__storage_)
+                                   storageSize:sizeof(TTERemoveNodesResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1185,18 +1186,18 @@ typedef struct RemoveNodesResponse__storage_ {
 
 @end
 
-#pragma mark - ResolveLinkRequest
+#pragma mark - TTEResolveLinkRequest
 
-@implementation ResolveLinkRequest
+@implementation TTEResolveLinkRequest
 
 @dynamic nodeCid;
 @dynamic pathArray, pathArray_Count;
 
-typedef struct ResolveLinkRequest__storage_ {
+typedef struct TTEResolveLinkRequest__storage_ {
   uint32_t _has_storage_[1];
   NSString *nodeCid;
   NSMutableArray *pathArray;
-} ResolveLinkRequest__storage_;
+} TTEResolveLinkRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1207,29 +1208,29 @@ typedef struct ResolveLinkRequest__storage_ {
       {
         .name = "nodeCid",
         .dataTypeSpecific.className = NULL,
-        .number = ResolveLinkRequest_FieldNumber_NodeCid,
+        .number = TTEResolveLinkRequest_FieldNumber_NodeCid,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(ResolveLinkRequest__storage_, nodeCid),
+        .offset = (uint32_t)offsetof(TTEResolveLinkRequest__storage_, nodeCid),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeString,
       },
       {
         .name = "pathArray",
         .dataTypeSpecific.className = NULL,
-        .number = ResolveLinkRequest_FieldNumber_PathArray,
+        .number = TTEResolveLinkRequest_FieldNumber_PathArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(ResolveLinkRequest__storage_, pathArray),
+        .offset = (uint32_t)offsetof(TTEResolveLinkRequest__storage_, pathArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[ResolveLinkRequest class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEResolveLinkRequest class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(ResolveLinkRequest__storage_)
+                                   storageSize:sizeof(TTEResolveLinkRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
@@ -1246,18 +1247,18 @@ typedef struct ResolveLinkRequest__storage_ {
 
 @end
 
-#pragma mark - ResolveLinkResponse
+#pragma mark - TTEResolveLinkResponse
 
-@implementation ResolveLinkResponse
+@implementation TTEResolveLinkResponse
 
 @dynamic hasLink, link;
 @dynamic remainingPathArray, remainingPathArray_Count;
 
-typedef struct ResolveLinkResponse__storage_ {
+typedef struct TTEResolveLinkResponse__storage_ {
   uint32_t _has_storage_[1];
-  Link *link;
+  TTELink *link;
   NSMutableArray *remainingPathArray;
-} ResolveLinkResponse__storage_;
+} TTEResolveLinkResponse__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1267,30 +1268,30 @@ typedef struct ResolveLinkResponse__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "link",
-        .dataTypeSpecific.className = GPBStringifySymbol(Link),
-        .number = ResolveLinkResponse_FieldNumber_Link,
+        .dataTypeSpecific.className = GPBStringifySymbol(TTELink),
+        .number = TTEResolveLinkResponse_FieldNumber_Link,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(ResolveLinkResponse__storage_, link),
+        .offset = (uint32_t)offsetof(TTEResolveLinkResponse__storage_, link),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "remainingPathArray",
         .dataTypeSpecific.className = NULL,
-        .number = ResolveLinkResponse_FieldNumber_RemainingPathArray,
+        .number = TTEResolveLinkResponse_FieldNumber_RemainingPathArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(ResolveLinkResponse__storage_, remainingPathArray),
+        .offset = (uint32_t)offsetof(TTEResolveLinkResponse__storage_, remainingPathArray),
         .flags = (GPBFieldFlags)(GPBFieldRepeated | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[ResolveLinkResponse class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEResolveLinkResponse class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(ResolveLinkResponse__storage_)
+                                   storageSize:sizeof(TTEResolveLinkResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
@@ -1307,20 +1308,20 @@ typedef struct ResolveLinkResponse__storage_ {
 
 @end
 
-#pragma mark - TreeRequest
+#pragma mark - TTETreeRequest
 
-@implementation TreeRequest
+@implementation TTETreeRequest
 
 @dynamic nodeCid;
 @dynamic path;
 @dynamic depth;
 
-typedef struct TreeRequest__storage_ {
+typedef struct TTETreeRequest__storage_ {
   uint32_t _has_storage_[1];
   int32_t depth;
   NSString *nodeCid;
   NSString *path;
-} TreeRequest__storage_;
+} TTETreeRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1331,38 +1332,38 @@ typedef struct TreeRequest__storage_ {
       {
         .name = "nodeCid",
         .dataTypeSpecific.className = NULL,
-        .number = TreeRequest_FieldNumber_NodeCid,
+        .number = TTETreeRequest_FieldNumber_NodeCid,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(TreeRequest__storage_, nodeCid),
+        .offset = (uint32_t)offsetof(TTETreeRequest__storage_, nodeCid),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeString,
       },
       {
         .name = "path",
         .dataTypeSpecific.className = NULL,
-        .number = TreeRequest_FieldNumber_Path,
+        .number = TTETreeRequest_FieldNumber_Path,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(TreeRequest__storage_, path),
+        .offset = (uint32_t)offsetof(TTETreeRequest__storage_, path),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "depth",
         .dataTypeSpecific.className = NULL,
-        .number = TreeRequest_FieldNumber_Depth,
+        .number = TTETreeRequest_FieldNumber_Depth,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(TreeRequest__storage_, depth),
+        .offset = (uint32_t)offsetof(TTETreeRequest__storage_, depth),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt32,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[TreeRequest class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTETreeRequest class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(TreeRequest__storage_)
+                                   storageSize:sizeof(TTETreeRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
@@ -1379,16 +1380,16 @@ typedef struct TreeRequest__storage_ {
 
 @end
 
-#pragma mark - TreeResponse
+#pragma mark - TTETreeResponse
 
-@implementation TreeResponse
+@implementation TTETreeResponse
 
 @dynamic pathsArray, pathsArray_Count;
 
-typedef struct TreeResponse__storage_ {
+typedef struct TTETreeResponse__storage_ {
   uint32_t _has_storage_[1];
   NSMutableArray *pathsArray;
-} TreeResponse__storage_;
+} TTETreeResponse__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1399,20 +1400,20 @@ typedef struct TreeResponse__storage_ {
       {
         .name = "pathsArray",
         .dataTypeSpecific.className = NULL,
-        .number = TreeResponse_FieldNumber_PathsArray,
+        .number = TTETreeResponse_FieldNumber_PathsArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(TreeResponse__storage_, pathsArray),
+        .offset = (uint32_t)offsetof(TTETreeResponse__storage_, pathsArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[TreeResponse class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTETreeResponse class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(TreeResponse__storage_)
+                                   storageSize:sizeof(TTETreeResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1424,16 +1425,16 @@ typedef struct TreeResponse__storage_ {
 
 @end
 
-#pragma mark - DeleteBlockRequest
+#pragma mark - TTEDeleteBlockRequest
 
-@implementation DeleteBlockRequest
+@implementation TTEDeleteBlockRequest
 
 @dynamic cid;
 
-typedef struct DeleteBlockRequest__storage_ {
+typedef struct TTEDeleteBlockRequest__storage_ {
   uint32_t _has_storage_[1];
   NSString *cid;
-} DeleteBlockRequest__storage_;
+} TTEDeleteBlockRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1444,20 +1445,20 @@ typedef struct DeleteBlockRequest__storage_ {
       {
         .name = "cid",
         .dataTypeSpecific.className = NULL,
-        .number = DeleteBlockRequest_FieldNumber_Cid,
+        .number = TTEDeleteBlockRequest_FieldNumber_Cid,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(DeleteBlockRequest__storage_, cid),
+        .offset = (uint32_t)offsetof(TTEDeleteBlockRequest__storage_, cid),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[DeleteBlockRequest class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEDeleteBlockRequest class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(DeleteBlockRequest__storage_)
+                                   storageSize:sizeof(TTEDeleteBlockRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1469,14 +1470,14 @@ typedef struct DeleteBlockRequest__storage_ {
 
 @end
 
-#pragma mark - DeleteBlockResponse
+#pragma mark - TTEDeleteBlockResponse
 
-@implementation DeleteBlockResponse
+@implementation TTEDeleteBlockResponse
 
 
-typedef struct DeleteBlockResponse__storage_ {
+typedef struct TTEDeleteBlockResponse__storage_ {
   uint32_t _has_storage_[1];
-} DeleteBlockResponse__storage_;
+} TTEDeleteBlockResponse__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1484,12 +1485,12 @@ typedef struct DeleteBlockResponse__storage_ {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[DeleteBlockResponse class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEDeleteBlockResponse class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:NULL
                                     fieldCount:0
-                                   storageSize:sizeof(DeleteBlockResponse__storage_)
+                                   storageSize:sizeof(TTEDeleteBlockResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1501,16 +1502,16 @@ typedef struct DeleteBlockResponse__storage_ {
 
 @end
 
-#pragma mark - HasBlockRequest
+#pragma mark - TTEHasBlockRequest
 
-@implementation HasBlockRequest
+@implementation TTEHasBlockRequest
 
 @dynamic cid;
 
-typedef struct HasBlockRequest__storage_ {
+typedef struct TTEHasBlockRequest__storage_ {
   uint32_t _has_storage_[1];
   NSString *cid;
-} HasBlockRequest__storage_;
+} TTEHasBlockRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1521,20 +1522,20 @@ typedef struct HasBlockRequest__storage_ {
       {
         .name = "cid",
         .dataTypeSpecific.className = NULL,
-        .number = HasBlockRequest_FieldNumber_Cid,
+        .number = TTEHasBlockRequest_FieldNumber_Cid,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(HasBlockRequest__storage_, cid),
+        .offset = (uint32_t)offsetof(TTEHasBlockRequest__storage_, cid),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[HasBlockRequest class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEHasBlockRequest class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(HasBlockRequest__storage_)
+                                   storageSize:sizeof(TTEHasBlockRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1546,15 +1547,15 @@ typedef struct HasBlockRequest__storage_ {
 
 @end
 
-#pragma mark - HasBlockResponse
+#pragma mark - TTEHasBlockResponse
 
-@implementation HasBlockResponse
+@implementation TTEHasBlockResponse
 
 @dynamic hasBlock;
 
-typedef struct HasBlockResponse__storage_ {
+typedef struct TTEHasBlockResponse__storage_ {
   uint32_t _has_storage_[1];
-} HasBlockResponse__storage_;
+} TTEHasBlockResponse__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1565,7 +1566,7 @@ typedef struct HasBlockResponse__storage_ {
       {
         .name = "hasBlock",
         .dataTypeSpecific.className = NULL,
-        .number = HasBlockResponse_FieldNumber_HasBlock,
+        .number = TTEHasBlockResponse_FieldNumber_HasBlock,
         .hasIndex = 0,
         .offset = 1,  // Stored in _has_storage_ to save space.
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
@@ -1573,12 +1574,12 @@ typedef struct HasBlockResponse__storage_ {
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[HasBlockResponse class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEHasBlockResponse class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(HasBlockResponse__storage_)
+                                   storageSize:sizeof(TTEHasBlockResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
@@ -1595,16 +1596,16 @@ typedef struct HasBlockResponse__storage_ {
 
 @end
 
-#pragma mark - GetBlockRequest
+#pragma mark - TTEGetBlockRequest
 
-@implementation GetBlockRequest
+@implementation TTEGetBlockRequest
 
 @dynamic cid;
 
-typedef struct GetBlockRequest__storage_ {
+typedef struct TTEGetBlockRequest__storage_ {
   uint32_t _has_storage_[1];
   NSString *cid;
-} GetBlockRequest__storage_;
+} TTEGetBlockRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1615,20 +1616,20 @@ typedef struct GetBlockRequest__storage_ {
       {
         .name = "cid",
         .dataTypeSpecific.className = NULL,
-        .number = GetBlockRequest_FieldNumber_Cid,
+        .number = TTEGetBlockRequest_FieldNumber_Cid,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(GetBlockRequest__storage_, cid),
+        .offset = (uint32_t)offsetof(TTEGetBlockRequest__storage_, cid),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[GetBlockRequest class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEGetBlockRequest class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(GetBlockRequest__storage_)
+                                   storageSize:sizeof(TTEGetBlockRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1640,16 +1641,16 @@ typedef struct GetBlockRequest__storage_ {
 
 @end
 
-#pragma mark - GetBlockResponse
+#pragma mark - TTEGetBlockResponse
 
-@implementation GetBlockResponse
+@implementation TTEGetBlockResponse
 
 @dynamic hasBlock, block;
 
-typedef struct GetBlockResponse__storage_ {
+typedef struct TTEGetBlockResponse__storage_ {
   uint32_t _has_storage_[1];
-  Block *block;
-} GetBlockResponse__storage_;
+  TTEBlock *block;
+} TTEGetBlockResponse__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1659,21 +1660,21 @@ typedef struct GetBlockResponse__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "block",
-        .dataTypeSpecific.className = GPBStringifySymbol(Block),
-        .number = GetBlockResponse_FieldNumber_Block,
+        .dataTypeSpecific.className = GPBStringifySymbol(TTEBlock),
+        .number = TTEGetBlockResponse_FieldNumber_Block,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(GetBlockResponse__storage_, block),
+        .offset = (uint32_t)offsetof(TTEGetBlockResponse__storage_, block),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[GetBlockResponse class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEGetBlockResponse class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(GetBlockResponse__storage_)
+                                   storageSize:sizeof(TTEGetBlockResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1685,16 +1686,16 @@ typedef struct GetBlockResponse__storage_ {
 
 @end
 
-#pragma mark - GetBlockSizeRequest
+#pragma mark - TTEGetBlockSizeRequest
 
-@implementation GetBlockSizeRequest
+@implementation TTEGetBlockSizeRequest
 
 @dynamic cid;
 
-typedef struct GetBlockSizeRequest__storage_ {
+typedef struct TTEGetBlockSizeRequest__storage_ {
   uint32_t _has_storage_[1];
   NSString *cid;
-} GetBlockSizeRequest__storage_;
+} TTEGetBlockSizeRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1705,20 +1706,20 @@ typedef struct GetBlockSizeRequest__storage_ {
       {
         .name = "cid",
         .dataTypeSpecific.className = NULL,
-        .number = GetBlockSizeRequest_FieldNumber_Cid,
+        .number = TTEGetBlockSizeRequest_FieldNumber_Cid,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(GetBlockSizeRequest__storage_, cid),
+        .offset = (uint32_t)offsetof(TTEGetBlockSizeRequest__storage_, cid),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[GetBlockSizeRequest class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEGetBlockSizeRequest class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(GetBlockSizeRequest__storage_)
+                                   storageSize:sizeof(TTEGetBlockSizeRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1730,16 +1731,16 @@ typedef struct GetBlockSizeRequest__storage_ {
 
 @end
 
-#pragma mark - GetBlockSizeResponse
+#pragma mark - TTEGetBlockSizeResponse
 
-@implementation GetBlockSizeResponse
+@implementation TTEGetBlockSizeResponse
 
 @dynamic size;
 
-typedef struct GetBlockSizeResponse__storage_ {
+typedef struct TTEGetBlockSizeResponse__storage_ {
   uint32_t _has_storage_[1];
   int32_t size;
-} GetBlockSizeResponse__storage_;
+} TTEGetBlockSizeResponse__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1750,20 +1751,20 @@ typedef struct GetBlockSizeResponse__storage_ {
       {
         .name = "size",
         .dataTypeSpecific.className = NULL,
-        .number = GetBlockSizeResponse_FieldNumber_Size,
+        .number = TTEGetBlockSizeResponse_FieldNumber_Size,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(GetBlockSizeResponse__storage_, size),
+        .offset = (uint32_t)offsetof(TTEGetBlockSizeResponse__storage_, size),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt32,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[GetBlockSizeResponse class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEGetBlockSizeResponse class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(GetBlockSizeResponse__storage_)
+                                   storageSize:sizeof(TTEGetBlockSizeResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1775,16 +1776,16 @@ typedef struct GetBlockSizeResponse__storage_ {
 
 @end
 
-#pragma mark - PutBlockRequest
+#pragma mark - TTEPutBlockRequest
 
-@implementation PutBlockRequest
+@implementation TTEPutBlockRequest
 
 @dynamic hasBlock, block;
 
-typedef struct PutBlockRequest__storage_ {
+typedef struct TTEPutBlockRequest__storage_ {
   uint32_t _has_storage_[1];
-  Block *block;
-} PutBlockRequest__storage_;
+  TTEBlock *block;
+} TTEPutBlockRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1794,21 +1795,21 @@ typedef struct PutBlockRequest__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "block",
-        .dataTypeSpecific.className = GPBStringifySymbol(Block),
-        .number = PutBlockRequest_FieldNumber_Block,
+        .dataTypeSpecific.className = GPBStringifySymbol(TTEBlock),
+        .number = TTEPutBlockRequest_FieldNumber_Block,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(PutBlockRequest__storage_, block),
+        .offset = (uint32_t)offsetof(TTEPutBlockRequest__storage_, block),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[PutBlockRequest class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEPutBlockRequest class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(PutBlockRequest__storage_)
+                                   storageSize:sizeof(TTEPutBlockRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1820,14 +1821,14 @@ typedef struct PutBlockRequest__storage_ {
 
 @end
 
-#pragma mark - PutBlockResponse
+#pragma mark - TTEPutBlockResponse
 
-@implementation PutBlockResponse
+@implementation TTEPutBlockResponse
 
 
-typedef struct PutBlockResponse__storage_ {
+typedef struct TTEPutBlockResponse__storage_ {
   uint32_t _has_storage_[1];
-} PutBlockResponse__storage_;
+} TTEPutBlockResponse__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1835,12 +1836,12 @@ typedef struct PutBlockResponse__storage_ {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[PutBlockResponse class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEPutBlockResponse class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:NULL
                                     fieldCount:0
-                                   storageSize:sizeof(PutBlockResponse__storage_)
+                                   storageSize:sizeof(TTEPutBlockResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1852,16 +1853,16 @@ typedef struct PutBlockResponse__storage_ {
 
 @end
 
-#pragma mark - PutBlocksRequest
+#pragma mark - TTEPutBlocksRequest
 
-@implementation PutBlocksRequest
+@implementation TTEPutBlocksRequest
 
 @dynamic blocksArray, blocksArray_Count;
 
-typedef struct PutBlocksRequest__storage_ {
+typedef struct TTEPutBlocksRequest__storage_ {
   uint32_t _has_storage_[1];
   NSMutableArray *blocksArray;
-} PutBlocksRequest__storage_;
+} TTEPutBlocksRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1871,21 +1872,21 @@ typedef struct PutBlocksRequest__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "blocksArray",
-        .dataTypeSpecific.className = GPBStringifySymbol(Block),
-        .number = PutBlocksRequest_FieldNumber_BlocksArray,
+        .dataTypeSpecific.className = GPBStringifySymbol(TTEBlock),
+        .number = TTEPutBlocksRequest_FieldNumber_BlocksArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(PutBlocksRequest__storage_, blocksArray),
+        .offset = (uint32_t)offsetof(TTEPutBlocksRequest__storage_, blocksArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[PutBlocksRequest class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEPutBlocksRequest class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(PutBlocksRequest__storage_)
+                                   storageSize:sizeof(TTEPutBlocksRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1897,14 +1898,14 @@ typedef struct PutBlocksRequest__storage_ {
 
 @end
 
-#pragma mark - PutBlocksResponse
+#pragma mark - TTEPutBlocksResponse
 
-@implementation PutBlocksResponse
+@implementation TTEPutBlocksResponse
 
 
-typedef struct PutBlocksResponse__storage_ {
+typedef struct TTEPutBlocksResponse__storage_ {
   uint32_t _has_storage_[1];
-} PutBlocksResponse__storage_;
+} TTEPutBlocksResponse__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1912,12 +1913,12 @@ typedef struct PutBlocksResponse__storage_ {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[PutBlocksResponse class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEPutBlocksResponse class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:NULL
                                     fieldCount:0
-                                   storageSize:sizeof(PutBlocksResponse__storage_)
+                                   storageSize:sizeof(TTEPutBlocksResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1929,14 +1930,14 @@ typedef struct PutBlocksResponse__storage_ {
 
 @end
 
-#pragma mark - AllKeysRequest
+#pragma mark - TTEAllKeysRequest
 
-@implementation AllKeysRequest
+@implementation TTEAllKeysRequest
 
 
-typedef struct AllKeysRequest__storage_ {
+typedef struct TTEAllKeysRequest__storage_ {
   uint32_t _has_storage_[1];
-} AllKeysRequest__storage_;
+} TTEAllKeysRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1944,12 +1945,12 @@ typedef struct AllKeysRequest__storage_ {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[AllKeysRequest class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEAllKeysRequest class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:NULL
                                     fieldCount:0
-                                   storageSize:sizeof(AllKeysRequest__storage_)
+                                   storageSize:sizeof(TTEAllKeysRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1961,16 +1962,16 @@ typedef struct AllKeysRequest__storage_ {
 
 @end
 
-#pragma mark - AllKeysResponse
+#pragma mark - TTEAllKeysResponse
 
-@implementation AllKeysResponse
+@implementation TTEAllKeysResponse
 
 @dynamic cid;
 
-typedef struct AllKeysResponse__storage_ {
+typedef struct TTEAllKeysResponse__storage_ {
   uint32_t _has_storage_[1];
   NSString *cid;
-} AllKeysResponse__storage_;
+} TTEAllKeysResponse__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1981,20 +1982,20 @@ typedef struct AllKeysResponse__storage_ {
       {
         .name = "cid",
         .dataTypeSpecific.className = NULL,
-        .number = AllKeysResponse_FieldNumber_Cid,
+        .number = TTEAllKeysResponse_FieldNumber_Cid,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(AllKeysResponse__storage_, cid),
+        .offset = (uint32_t)offsetof(TTEAllKeysResponse__storage_, cid),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[AllKeysResponse class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEAllKeysResponse class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(AllKeysResponse__storage_)
+                                   storageSize:sizeof(TTEAllKeysResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -2006,15 +2007,15 @@ typedef struct AllKeysResponse__storage_ {
 
 @end
 
-#pragma mark - HashOnReadRequest
+#pragma mark - TTEHashOnReadRequest
 
-@implementation HashOnReadRequest
+@implementation TTEHashOnReadRequest
 
 @dynamic hashOnRead;
 
-typedef struct HashOnReadRequest__storage_ {
+typedef struct TTEHashOnReadRequest__storage_ {
   uint32_t _has_storage_[1];
-} HashOnReadRequest__storage_;
+} TTEHashOnReadRequest__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -2025,7 +2026,7 @@ typedef struct HashOnReadRequest__storage_ {
       {
         .name = "hashOnRead",
         .dataTypeSpecific.className = NULL,
-        .number = HashOnReadRequest_FieldNumber_HashOnRead,
+        .number = TTEHashOnReadRequest_FieldNumber_HashOnRead,
         .hasIndex = 0,
         .offset = 1,  // Stored in _has_storage_ to save space.
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
@@ -2033,12 +2034,12 @@ typedef struct HashOnReadRequest__storage_ {
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[HashOnReadRequest class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEHashOnReadRequest class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(HashOnReadRequest__storage_)
+                                   storageSize:sizeof(TTEHashOnReadRequest__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
@@ -2055,14 +2056,14 @@ typedef struct HashOnReadRequest__storage_ {
 
 @end
 
-#pragma mark - HashOnReadResponse
+#pragma mark - TTEHashOnReadResponse
 
-@implementation HashOnReadResponse
+@implementation TTEHashOnReadResponse
 
 
-typedef struct HashOnReadResponse__storage_ {
+typedef struct TTEHashOnReadResponse__storage_ {
   uint32_t _has_storage_[1];
-} HashOnReadResponse__storage_;
+} TTEHashOnReadResponse__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -2070,12 +2071,12 @@ typedef struct HashOnReadResponse__storage_ {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[HashOnReadResponse class]
-                                     rootClass:[IpfsLiteRoot class]
-                                          file:IpfsLiteRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TTEHashOnReadResponse class]
+                                     rootClass:[TTEIpfsLiteRoot class]
+                                          file:TTEIpfsLiteRoot_FileDescriptor()
                                         fields:NULL
                                     fieldCount:0
-                                   storageSize:sizeof(HashOnReadResponse__storage_)
+                                   storageSize:sizeof(TTEHashOnReadResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");

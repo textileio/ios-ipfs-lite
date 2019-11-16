@@ -27,15 +27,15 @@
 
 CF_EXTERN_C_BEGIN
 
-@class AddParams;
-@class Block;
-@class Link;
-@class Node;
-@class NodeStat;
+@class TTEAddParams;
+@class TTEBlock;
+@class TTELink;
+@class TTENode;
+@class TTENodeStat;
 
 NS_ASSUME_NONNULL_BEGIN
 
-#pragma mark - IpfsLiteRoot
+#pragma mark - TTEIpfsLiteRoot
 
 /**
  * Exposes the extension registry for this file.
@@ -47,22 +47,22 @@ NS_ASSUME_NONNULL_BEGIN
  * which is a @c GPBExtensionRegistry that includes all the extensions defined by
  * this file and all files that it depends on.
  **/
-@interface IpfsLiteRoot : GPBRootObject
+@interface TTEIpfsLiteRoot : GPBRootObject
 @end
 
-#pragma mark - AddParams
+#pragma mark - TTEAddParams
 
-typedef GPB_ENUM(AddParams_FieldNumber) {
-  AddParams_FieldNumber_Layout = 1,
-  AddParams_FieldNumber_Chunker = 2,
-  AddParams_FieldNumber_RawLeaves = 3,
-  AddParams_FieldNumber_Hidden = 4,
-  AddParams_FieldNumber_Shared = 5,
-  AddParams_FieldNumber_NoCopy = 6,
-  AddParams_FieldNumber_HashFun = 7,
+typedef GPB_ENUM(TTEAddParams_FieldNumber) {
+  TTEAddParams_FieldNumber_Layout = 1,
+  TTEAddParams_FieldNumber_Chunker = 2,
+  TTEAddParams_FieldNumber_RawLeaves = 3,
+  TTEAddParams_FieldNumber_Hidden = 4,
+  TTEAddParams_FieldNumber_Shared = 5,
+  TTEAddParams_FieldNumber_NoCopy = 6,
+  TTEAddParams_FieldNumber_HashFun = 7,
 };
 
-@interface AddParams : GPBMessage
+@interface TTEAddParams : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *layout;
 
@@ -80,14 +80,14 @@ typedef GPB_ENUM(AddParams_FieldNumber) {
 
 @end
 
-#pragma mark - Block
+#pragma mark - TTEBlock
 
-typedef GPB_ENUM(Block_FieldNumber) {
-  Block_FieldNumber_RawData = 1,
-  Block_FieldNumber_Cid = 2,
+typedef GPB_ENUM(TTEBlock_FieldNumber) {
+  TTEBlock_FieldNumber_RawData = 1,
+  TTEBlock_FieldNumber_Cid = 2,
 };
 
-@interface Block : GPBMessage
+@interface TTEBlock : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *rawData;
 
@@ -95,15 +95,15 @@ typedef GPB_ENUM(Block_FieldNumber) {
 
 @end
 
-#pragma mark - Link
+#pragma mark - TTELink
 
-typedef GPB_ENUM(Link_FieldNumber) {
-  Link_FieldNumber_Name = 1,
-  Link_FieldNumber_Size = 2,
-  Link_FieldNumber_Cid = 3,
+typedef GPB_ENUM(TTELink_FieldNumber) {
+  TTELink_FieldNumber_Name = 1,
+  TTELink_FieldNumber_Size = 2,
+  TTELink_FieldNumber_Cid = 3,
 };
 
-@interface Link : GPBMessage
+@interface TTELink : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *name;
 
@@ -113,18 +113,18 @@ typedef GPB_ENUM(Link_FieldNumber) {
 
 @end
 
-#pragma mark - NodeStat
+#pragma mark - TTENodeStat
 
-typedef GPB_ENUM(NodeStat_FieldNumber) {
-  NodeStat_FieldNumber_Hash_p = 1,
-  NodeStat_FieldNumber_NumLinks = 2,
-  NodeStat_FieldNumber_BlockSize = 3,
-  NodeStat_FieldNumber_LinksSize = 4,
-  NodeStat_FieldNumber_DataSize = 5,
-  NodeStat_FieldNumber_CumulativeSize = 6,
+typedef GPB_ENUM(TTENodeStat_FieldNumber) {
+  TTENodeStat_FieldNumber_Hash_p = 1,
+  TTENodeStat_FieldNumber_NumLinks = 2,
+  TTENodeStat_FieldNumber_BlockSize = 3,
+  TTENodeStat_FieldNumber_LinksSize = 4,
+  TTENodeStat_FieldNumber_DataSize = 5,
+  TTENodeStat_FieldNumber_CumulativeSize = 6,
 };
 
-@interface NodeStat : GPBMessage
+@interface TTENodeStat : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *hash_p;
 
@@ -140,26 +140,26 @@ typedef GPB_ENUM(NodeStat_FieldNumber) {
 
 @end
 
-#pragma mark - Node
+#pragma mark - TTENode
 
-typedef GPB_ENUM(Node_FieldNumber) {
-  Node_FieldNumber_Block = 1,
-  Node_FieldNumber_LinksArray = 2,
-  Node_FieldNumber_Stat = 3,
-  Node_FieldNumber_Size = 4,
+typedef GPB_ENUM(TTENode_FieldNumber) {
+  TTENode_FieldNumber_Block = 1,
+  TTENode_FieldNumber_LinksArray = 2,
+  TTENode_FieldNumber_Stat = 3,
+  TTENode_FieldNumber_Size = 4,
 };
 
-@interface Node : GPBMessage
+@interface TTENode : GPBMessage
 
-@property(nonatomic, readwrite, strong, null_resettable) Block *block;
+@property(nonatomic, readwrite, strong, null_resettable) TTEBlock *block;
 /** Test to see if @c block has been set. */
 @property(nonatomic, readwrite) BOOL hasBlock;
 
-@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<Link*> *linksArray;
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<TTELink*> *linksArray;
 /** The number of items in @c linksArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger linksArray_Count;
 
-@property(nonatomic, readwrite, strong, null_resettable) NodeStat *stat;
+@property(nonatomic, readwrite, strong, null_resettable) TTENodeStat *stat;
 /** Test to see if @c stat has been set. */
 @property(nonatomic, readwrite) BOOL hasStat;
 
@@ -167,24 +167,24 @@ typedef GPB_ENUM(Node_FieldNumber) {
 
 @end
 
-#pragma mark - AddFileRequest
+#pragma mark - TTEAddFileRequest
 
-typedef GPB_ENUM(AddFileRequest_FieldNumber) {
-  AddFileRequest_FieldNumber_AddParams = 1,
-  AddFileRequest_FieldNumber_Chunk = 2,
+typedef GPB_ENUM(TTEAddFileRequest_FieldNumber) {
+  TTEAddFileRequest_FieldNumber_AddParams = 1,
+  TTEAddFileRequest_FieldNumber_Chunk = 2,
 };
 
-typedef GPB_ENUM(AddFileRequest_Payload_OneOfCase) {
-  AddFileRequest_Payload_OneOfCase_GPBUnsetOneOfCase = 0,
-  AddFileRequest_Payload_OneOfCase_AddParams = 1,
-  AddFileRequest_Payload_OneOfCase_Chunk = 2,
+typedef GPB_ENUM(TTEAddFileRequest_Payload_OneOfCase) {
+  TTEAddFileRequest_Payload_OneOfCase_GPBUnsetOneOfCase = 0,
+  TTEAddFileRequest_Payload_OneOfCase_AddParams = 1,
+  TTEAddFileRequest_Payload_OneOfCase_Chunk = 2,
 };
 
-@interface AddFileRequest : GPBMessage
+@interface TTEAddFileRequest : GPBMessage
 
-@property(nonatomic, readonly) AddFileRequest_Payload_OneOfCase payloadOneOfCase;
+@property(nonatomic, readonly) TTEAddFileRequest_Payload_OneOfCase payloadOneOfCase;
 
-@property(nonatomic, readwrite, strong, null_resettable) AddParams *addParams;
+@property(nonatomic, readwrite, strong, null_resettable) TTEAddParams *addParams;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *chunk;
 
@@ -193,119 +193,119 @@ typedef GPB_ENUM(AddFileRequest_Payload_OneOfCase) {
 /**
  * Clears whatever value was set for the oneof 'payload'.
  **/
-void AddFileRequest_ClearPayloadOneOfCase(AddFileRequest *message);
+void TTEAddFileRequest_ClearPayloadOneOfCase(TTEAddFileRequest *message);
 
-#pragma mark - AddFileResponse
+#pragma mark - TTEAddFileResponse
 
-typedef GPB_ENUM(AddFileResponse_FieldNumber) {
-  AddFileResponse_FieldNumber_Node = 1,
+typedef GPB_ENUM(TTEAddFileResponse_FieldNumber) {
+  TTEAddFileResponse_FieldNumber_Node = 1,
 };
 
-@interface AddFileResponse : GPBMessage
+@interface TTEAddFileResponse : GPBMessage
 
-@property(nonatomic, readwrite, strong, null_resettable) Node *node;
+@property(nonatomic, readwrite, strong, null_resettable) TTENode *node;
 /** Test to see if @c node has been set. */
 @property(nonatomic, readwrite) BOOL hasNode;
 
 @end
 
-#pragma mark - GetFileRequest
+#pragma mark - TTEGetFileRequest
 
-typedef GPB_ENUM(GetFileRequest_FieldNumber) {
-  GetFileRequest_FieldNumber_Cid = 1,
+typedef GPB_ENUM(TTEGetFileRequest_FieldNumber) {
+  TTEGetFileRequest_FieldNumber_Cid = 1,
 };
 
-@interface GetFileRequest : GPBMessage
+@interface TTEGetFileRequest : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *cid;
 
 @end
 
-#pragma mark - GetFileResponse
+#pragma mark - TTEGetFileResponse
 
-typedef GPB_ENUM(GetFileResponse_FieldNumber) {
-  GetFileResponse_FieldNumber_Chunk = 1,
+typedef GPB_ENUM(TTEGetFileResponse_FieldNumber) {
+  TTEGetFileResponse_FieldNumber_Chunk = 1,
 };
 
-@interface GetFileResponse : GPBMessage
+@interface TTEGetFileResponse : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *chunk;
 
 @end
 
-#pragma mark - AddNodeRequest
+#pragma mark - TTEAddNodeRequest
 
-typedef GPB_ENUM(AddNodeRequest_FieldNumber) {
-  AddNodeRequest_FieldNumber_Block = 1,
+typedef GPB_ENUM(TTEAddNodeRequest_FieldNumber) {
+  TTEAddNodeRequest_FieldNumber_Block = 1,
 };
 
-@interface AddNodeRequest : GPBMessage
+@interface TTEAddNodeRequest : GPBMessage
 
-@property(nonatomic, readwrite, strong, null_resettable) Block *block;
+@property(nonatomic, readwrite, strong, null_resettable) TTEBlock *block;
 /** Test to see if @c block has been set. */
 @property(nonatomic, readwrite) BOOL hasBlock;
 
 @end
 
-#pragma mark - AddNodeResponse
+#pragma mark - TTEAddNodeResponse
 
-@interface AddNodeResponse : GPBMessage
+@interface TTEAddNodeResponse : GPBMessage
 
 @end
 
-#pragma mark - AddNodesRequest
+#pragma mark - TTEAddNodesRequest
 
-typedef GPB_ENUM(AddNodesRequest_FieldNumber) {
-  AddNodesRequest_FieldNumber_BlocksArray = 1,
+typedef GPB_ENUM(TTEAddNodesRequest_FieldNumber) {
+  TTEAddNodesRequest_FieldNumber_BlocksArray = 1,
 };
 
-@interface AddNodesRequest : GPBMessage
+@interface TTEAddNodesRequest : GPBMessage
 
-@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<Block*> *blocksArray;
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<TTEBlock*> *blocksArray;
 /** The number of items in @c blocksArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger blocksArray_Count;
 
 @end
 
-#pragma mark - AddNodesResponse
+#pragma mark - TTEAddNodesResponse
 
-@interface AddNodesResponse : GPBMessage
+@interface TTEAddNodesResponse : GPBMessage
 
 @end
 
-#pragma mark - GetNodeRequest
+#pragma mark - TTEGetNodeRequest
 
-typedef GPB_ENUM(GetNodeRequest_FieldNumber) {
-  GetNodeRequest_FieldNumber_Cid = 1,
+typedef GPB_ENUM(TTEGetNodeRequest_FieldNumber) {
+  TTEGetNodeRequest_FieldNumber_Cid = 1,
 };
 
-@interface GetNodeRequest : GPBMessage
+@interface TTEGetNodeRequest : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *cid;
 
 @end
 
-#pragma mark - GetNodeResponse
+#pragma mark - TTEGetNodeResponse
 
-typedef GPB_ENUM(GetNodeResponse_FieldNumber) {
-  GetNodeResponse_FieldNumber_Node = 1,
+typedef GPB_ENUM(TTEGetNodeResponse_FieldNumber) {
+  TTEGetNodeResponse_FieldNumber_Node = 1,
 };
 
-@interface GetNodeResponse : GPBMessage
+@interface TTEGetNodeResponse : GPBMessage
 
-@property(nonatomic, readwrite, strong, null_resettable) Node *node;
+@property(nonatomic, readwrite, strong, null_resettable) TTENode *node;
 /** Test to see if @c node has been set. */
 @property(nonatomic, readwrite) BOOL hasNode;
 
 @end
 
-#pragma mark - GetNodesRequest
+#pragma mark - TTEGetNodesRequest
 
-typedef GPB_ENUM(GetNodesRequest_FieldNumber) {
-  GetNodesRequest_FieldNumber_CidsArray = 1,
+typedef GPB_ENUM(TTEGetNodesRequest_FieldNumber) {
+  TTEGetNodesRequest_FieldNumber_CidsArray = 1,
 };
 
-@interface GetNodesRequest : GPBMessage
+@interface TTEGetNodesRequest : GPBMessage
 
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<NSString*> *cidsArray;
 /** The number of items in @c cidsArray without causing the array to be created. */
@@ -313,24 +313,24 @@ typedef GPB_ENUM(GetNodesRequest_FieldNumber) {
 
 @end
 
-#pragma mark - GetNodesResponse
+#pragma mark - TTEGetNodesResponse
 
-typedef GPB_ENUM(GetNodesResponse_FieldNumber) {
-  GetNodesResponse_FieldNumber_Node = 1,
-  GetNodesResponse_FieldNumber_Error = 2,
+typedef GPB_ENUM(TTEGetNodesResponse_FieldNumber) {
+  TTEGetNodesResponse_FieldNumber_Node = 1,
+  TTEGetNodesResponse_FieldNumber_Error = 2,
 };
 
-typedef GPB_ENUM(GetNodesResponse_Option_OneOfCase) {
-  GetNodesResponse_Option_OneOfCase_GPBUnsetOneOfCase = 0,
-  GetNodesResponse_Option_OneOfCase_Node = 1,
-  GetNodesResponse_Option_OneOfCase_Error = 2,
+typedef GPB_ENUM(TTEGetNodesResponse_Option_OneOfCase) {
+  TTEGetNodesResponse_Option_OneOfCase_GPBUnsetOneOfCase = 0,
+  TTEGetNodesResponse_Option_OneOfCase_Node = 1,
+  TTEGetNodesResponse_Option_OneOfCase_Error = 2,
 };
 
-@interface GetNodesResponse : GPBMessage
+@interface TTEGetNodesResponse : GPBMessage
 
-@property(nonatomic, readonly) GetNodesResponse_Option_OneOfCase optionOneOfCase;
+@property(nonatomic, readonly) TTEGetNodesResponse_Option_OneOfCase optionOneOfCase;
 
-@property(nonatomic, readwrite, strong, null_resettable) Node *node;
+@property(nonatomic, readwrite, strong, null_resettable) TTENode *node;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *error;
 
@@ -339,33 +339,33 @@ typedef GPB_ENUM(GetNodesResponse_Option_OneOfCase) {
 /**
  * Clears whatever value was set for the oneof 'option'.
  **/
-void GetNodesResponse_ClearOptionOneOfCase(GetNodesResponse *message);
+void TTEGetNodesResponse_ClearOptionOneOfCase(TTEGetNodesResponse *message);
 
-#pragma mark - RemoveNodeRequest
+#pragma mark - TTERemoveNodeRequest
 
-typedef GPB_ENUM(RemoveNodeRequest_FieldNumber) {
-  RemoveNodeRequest_FieldNumber_Cid = 1,
+typedef GPB_ENUM(TTERemoveNodeRequest_FieldNumber) {
+  TTERemoveNodeRequest_FieldNumber_Cid = 1,
 };
 
-@interface RemoveNodeRequest : GPBMessage
+@interface TTERemoveNodeRequest : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *cid;
 
 @end
 
-#pragma mark - RemoveNodeResponse
+#pragma mark - TTERemoveNodeResponse
 
-@interface RemoveNodeResponse : GPBMessage
+@interface TTERemoveNodeResponse : GPBMessage
 
 @end
 
-#pragma mark - RemoveNodesRequest
+#pragma mark - TTERemoveNodesRequest
 
-typedef GPB_ENUM(RemoveNodesRequest_FieldNumber) {
-  RemoveNodesRequest_FieldNumber_CidsArray = 1,
+typedef GPB_ENUM(TTERemoveNodesRequest_FieldNumber) {
+  TTERemoveNodesRequest_FieldNumber_CidsArray = 1,
 };
 
-@interface RemoveNodesRequest : GPBMessage
+@interface TTERemoveNodesRequest : GPBMessage
 
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<NSString*> *cidsArray;
 /** The number of items in @c cidsArray without causing the array to be created. */
@@ -373,20 +373,20 @@ typedef GPB_ENUM(RemoveNodesRequest_FieldNumber) {
 
 @end
 
-#pragma mark - RemoveNodesResponse
+#pragma mark - TTERemoveNodesResponse
 
-@interface RemoveNodesResponse : GPBMessage
+@interface TTERemoveNodesResponse : GPBMessage
 
 @end
 
-#pragma mark - ResolveLinkRequest
+#pragma mark - TTEResolveLinkRequest
 
-typedef GPB_ENUM(ResolveLinkRequest_FieldNumber) {
-  ResolveLinkRequest_FieldNumber_NodeCid = 1,
-  ResolveLinkRequest_FieldNumber_PathArray = 2,
+typedef GPB_ENUM(TTEResolveLinkRequest_FieldNumber) {
+  TTEResolveLinkRequest_FieldNumber_NodeCid = 1,
+  TTEResolveLinkRequest_FieldNumber_PathArray = 2,
 };
 
-@interface ResolveLinkRequest : GPBMessage
+@interface TTEResolveLinkRequest : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *nodeCid;
 
@@ -396,16 +396,16 @@ typedef GPB_ENUM(ResolveLinkRequest_FieldNumber) {
 
 @end
 
-#pragma mark - ResolveLinkResponse
+#pragma mark - TTEResolveLinkResponse
 
-typedef GPB_ENUM(ResolveLinkResponse_FieldNumber) {
-  ResolveLinkResponse_FieldNumber_Link = 1,
-  ResolveLinkResponse_FieldNumber_RemainingPathArray = 2,
+typedef GPB_ENUM(TTEResolveLinkResponse_FieldNumber) {
+  TTEResolveLinkResponse_FieldNumber_Link = 1,
+  TTEResolveLinkResponse_FieldNumber_RemainingPathArray = 2,
 };
 
-@interface ResolveLinkResponse : GPBMessage
+@interface TTEResolveLinkResponse : GPBMessage
 
-@property(nonatomic, readwrite, strong, null_resettable) Link *link;
+@property(nonatomic, readwrite, strong, null_resettable) TTELink *link;
 /** Test to see if @c link has been set. */
 @property(nonatomic, readwrite) BOOL hasLink;
 
@@ -415,15 +415,15 @@ typedef GPB_ENUM(ResolveLinkResponse_FieldNumber) {
 
 @end
 
-#pragma mark - TreeRequest
+#pragma mark - TTETreeRequest
 
-typedef GPB_ENUM(TreeRequest_FieldNumber) {
-  TreeRequest_FieldNumber_NodeCid = 1,
-  TreeRequest_FieldNumber_Path = 2,
-  TreeRequest_FieldNumber_Depth = 3,
+typedef GPB_ENUM(TTETreeRequest_FieldNumber) {
+  TTETreeRequest_FieldNumber_NodeCid = 1,
+  TTETreeRequest_FieldNumber_Path = 2,
+  TTETreeRequest_FieldNumber_Depth = 3,
 };
 
-@interface TreeRequest : GPBMessage
+@interface TTETreeRequest : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *nodeCid;
 
@@ -433,13 +433,13 @@ typedef GPB_ENUM(TreeRequest_FieldNumber) {
 
 @end
 
-#pragma mark - TreeResponse
+#pragma mark - TTETreeResponse
 
-typedef GPB_ENUM(TreeResponse_FieldNumber) {
-  TreeResponse_FieldNumber_PathsArray = 1,
+typedef GPB_ENUM(TTETreeResponse_FieldNumber) {
+  TTETreeResponse_FieldNumber_PathsArray = 1,
 };
 
-@interface TreeResponse : GPBMessage
+@interface TTETreeResponse : GPBMessage
 
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<NSString*> *pathsArray;
 /** The number of items in @c pathsArray without causing the array to be created. */
@@ -447,171 +447,171 @@ typedef GPB_ENUM(TreeResponse_FieldNumber) {
 
 @end
 
-#pragma mark - DeleteBlockRequest
+#pragma mark - TTEDeleteBlockRequest
 
-typedef GPB_ENUM(DeleteBlockRequest_FieldNumber) {
-  DeleteBlockRequest_FieldNumber_Cid = 1,
+typedef GPB_ENUM(TTEDeleteBlockRequest_FieldNumber) {
+  TTEDeleteBlockRequest_FieldNumber_Cid = 1,
 };
 
-@interface DeleteBlockRequest : GPBMessage
+@interface TTEDeleteBlockRequest : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *cid;
 
 @end
 
-#pragma mark - DeleteBlockResponse
+#pragma mark - TTEDeleteBlockResponse
 
-@interface DeleteBlockResponse : GPBMessage
+@interface TTEDeleteBlockResponse : GPBMessage
 
 @end
 
-#pragma mark - HasBlockRequest
+#pragma mark - TTEHasBlockRequest
 
-typedef GPB_ENUM(HasBlockRequest_FieldNumber) {
-  HasBlockRequest_FieldNumber_Cid = 1,
+typedef GPB_ENUM(TTEHasBlockRequest_FieldNumber) {
+  TTEHasBlockRequest_FieldNumber_Cid = 1,
 };
 
-@interface HasBlockRequest : GPBMessage
+@interface TTEHasBlockRequest : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *cid;
 
 @end
 
-#pragma mark - HasBlockResponse
+#pragma mark - TTEHasBlockResponse
 
-typedef GPB_ENUM(HasBlockResponse_FieldNumber) {
-  HasBlockResponse_FieldNumber_HasBlock = 1,
+typedef GPB_ENUM(TTEHasBlockResponse_FieldNumber) {
+  TTEHasBlockResponse_FieldNumber_HasBlock = 1,
 };
 
-@interface HasBlockResponse : GPBMessage
+@interface TTEHasBlockResponse : GPBMessage
 
 @property(nonatomic, readwrite) BOOL hasBlock;
 
 @end
 
-#pragma mark - GetBlockRequest
+#pragma mark - TTEGetBlockRequest
 
-typedef GPB_ENUM(GetBlockRequest_FieldNumber) {
-  GetBlockRequest_FieldNumber_Cid = 1,
+typedef GPB_ENUM(TTEGetBlockRequest_FieldNumber) {
+  TTEGetBlockRequest_FieldNumber_Cid = 1,
 };
 
-@interface GetBlockRequest : GPBMessage
+@interface TTEGetBlockRequest : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *cid;
 
 @end
 
-#pragma mark - GetBlockResponse
+#pragma mark - TTEGetBlockResponse
 
-typedef GPB_ENUM(GetBlockResponse_FieldNumber) {
-  GetBlockResponse_FieldNumber_Block = 1,
+typedef GPB_ENUM(TTEGetBlockResponse_FieldNumber) {
+  TTEGetBlockResponse_FieldNumber_Block = 1,
 };
 
-@interface GetBlockResponse : GPBMessage
+@interface TTEGetBlockResponse : GPBMessage
 
-@property(nonatomic, readwrite, strong, null_resettable) Block *block;
+@property(nonatomic, readwrite, strong, null_resettable) TTEBlock *block;
 /** Test to see if @c block has been set. */
 @property(nonatomic, readwrite) BOOL hasBlock;
 
 @end
 
-#pragma mark - GetBlockSizeRequest
+#pragma mark - TTEGetBlockSizeRequest
 
-typedef GPB_ENUM(GetBlockSizeRequest_FieldNumber) {
-  GetBlockSizeRequest_FieldNumber_Cid = 1,
+typedef GPB_ENUM(TTEGetBlockSizeRequest_FieldNumber) {
+  TTEGetBlockSizeRequest_FieldNumber_Cid = 1,
 };
 
-@interface GetBlockSizeRequest : GPBMessage
+@interface TTEGetBlockSizeRequest : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *cid;
 
 @end
 
-#pragma mark - GetBlockSizeResponse
+#pragma mark - TTEGetBlockSizeResponse
 
-typedef GPB_ENUM(GetBlockSizeResponse_FieldNumber) {
-  GetBlockSizeResponse_FieldNumber_Size = 1,
+typedef GPB_ENUM(TTEGetBlockSizeResponse_FieldNumber) {
+  TTEGetBlockSizeResponse_FieldNumber_Size = 1,
 };
 
-@interface GetBlockSizeResponse : GPBMessage
+@interface TTEGetBlockSizeResponse : GPBMessage
 
 @property(nonatomic, readwrite) int32_t size;
 
 @end
 
-#pragma mark - PutBlockRequest
+#pragma mark - TTEPutBlockRequest
 
-typedef GPB_ENUM(PutBlockRequest_FieldNumber) {
-  PutBlockRequest_FieldNumber_Block = 1,
+typedef GPB_ENUM(TTEPutBlockRequest_FieldNumber) {
+  TTEPutBlockRequest_FieldNumber_Block = 1,
 };
 
-@interface PutBlockRequest : GPBMessage
+@interface TTEPutBlockRequest : GPBMessage
 
-@property(nonatomic, readwrite, strong, null_resettable) Block *block;
+@property(nonatomic, readwrite, strong, null_resettable) TTEBlock *block;
 /** Test to see if @c block has been set. */
 @property(nonatomic, readwrite) BOOL hasBlock;
 
 @end
 
-#pragma mark - PutBlockResponse
+#pragma mark - TTEPutBlockResponse
 
-@interface PutBlockResponse : GPBMessage
+@interface TTEPutBlockResponse : GPBMessage
 
 @end
 
-#pragma mark - PutBlocksRequest
+#pragma mark - TTEPutBlocksRequest
 
-typedef GPB_ENUM(PutBlocksRequest_FieldNumber) {
-  PutBlocksRequest_FieldNumber_BlocksArray = 1,
+typedef GPB_ENUM(TTEPutBlocksRequest_FieldNumber) {
+  TTEPutBlocksRequest_FieldNumber_BlocksArray = 1,
 };
 
-@interface PutBlocksRequest : GPBMessage
+@interface TTEPutBlocksRequest : GPBMessage
 
-@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<Block*> *blocksArray;
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<TTEBlock*> *blocksArray;
 /** The number of items in @c blocksArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger blocksArray_Count;
 
 @end
 
-#pragma mark - PutBlocksResponse
+#pragma mark - TTEPutBlocksResponse
 
-@interface PutBlocksResponse : GPBMessage
-
-@end
-
-#pragma mark - AllKeysRequest
-
-@interface AllKeysRequest : GPBMessage
+@interface TTEPutBlocksResponse : GPBMessage
 
 @end
 
-#pragma mark - AllKeysResponse
+#pragma mark - TTEAllKeysRequest
 
-typedef GPB_ENUM(AllKeysResponse_FieldNumber) {
-  AllKeysResponse_FieldNumber_Cid = 1,
+@interface TTEAllKeysRequest : GPBMessage
+
+@end
+
+#pragma mark - TTEAllKeysResponse
+
+typedef GPB_ENUM(TTEAllKeysResponse_FieldNumber) {
+  TTEAllKeysResponse_FieldNumber_Cid = 1,
 };
 
-@interface AllKeysResponse : GPBMessage
+@interface TTEAllKeysResponse : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *cid;
 
 @end
 
-#pragma mark - HashOnReadRequest
+#pragma mark - TTEHashOnReadRequest
 
-typedef GPB_ENUM(HashOnReadRequest_FieldNumber) {
-  HashOnReadRequest_FieldNumber_HashOnRead = 1,
+typedef GPB_ENUM(TTEHashOnReadRequest_FieldNumber) {
+  TTEHashOnReadRequest_FieldNumber_HashOnRead = 1,
 };
 
-@interface HashOnReadRequest : GPBMessage
+@interface TTEHashOnReadRequest : GPBMessage
 
 @property(nonatomic, readwrite) BOOL hashOnRead;
 
 @end
 
-#pragma mark - HashOnReadResponse
+#pragma mark - TTEHashOnReadResponse
 
-@interface HashOnReadResponse : GPBMessage
+@interface TTEHashOnReadResponse : GPBMessage
 
 @end
 
