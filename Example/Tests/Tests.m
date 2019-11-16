@@ -6,8 +6,8 @@ SpecBegin(InitialSpecs)
 
 describe(@"test the api", ^{
     
-    __block Node *refTextNode;
-    __block Node *refImageNode;
+    __block TTENode *refTextNode;
+    __block TTENode *refImageNode;
     NSString *apolloArchiverCid = @"QmSnuWmxptJZdLJpKRarxBMS2Ju2oANVrgbr2xWbie9b2D";
     
     it(@"should start", ^{
@@ -22,7 +22,7 @@ describe(@"test the api", ^{
     it(@"should add file", ^{
         waitUntil(^(DoneCallback done) {
             NSInputStream *input = [[NSInputStream alloc] initWithData:[@"Hello there\n" dataUsingEncoding:NSUTF8StringEncoding]];
-            [IpfsLiteApi.instance addFileWithParams:[[AddParams alloc] init] input:input completion:^(Node * _Nullable node, NSError * _Nullable error) {
+            [IpfsLiteApi.instance addFileFromInput:input params:[[TTEAddParams alloc] init] completion:^(TTENode * _Nullable node, NSError * _Nullable error) {
                 expect(error).beNil();
                 expect(node).notTo.beNil();
                 refTextNode = node;
@@ -35,7 +35,7 @@ describe(@"test the api", ^{
         waitUntil(^(DoneCallback done) {
             NSString *path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"jpeg"];
             NSInputStream *input = [[NSInputStream alloc] initWithFileAtPath:path];
-            [IpfsLiteApi.instance addFileWithParams:[[AddParams alloc] init] input:input completion:^(Node * _Nullable node, NSError * _Nullable error) {
+            [IpfsLiteApi.instance addFileFromInput:input params:[[TTEAddParams alloc] init] completion:^(TTENode * _Nullable node, NSError * _Nullable error) {
                 expect(error).beNil();
                 expect(node).notTo.beNil();
                 refImageNode = node;
@@ -60,7 +60,7 @@ describe(@"test the api", ^{
             NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
             NSString *outputPath = [documents stringByAppendingPathComponent:@"out.jpeg"];
             NSOutputStream *output = [NSOutputStream outputStreamToFileAtPath:outputPath append:NO];
-            [IpfsLiteApi.instance getFileWithCid:refImageNode.block.cid toOutput:output completion:^(NSError * _Nullable error) {
+            [IpfsLiteApi.instance getFileToOutput:output cid:refImageNode.block.cid completion:^(NSError * _Nullable error) {
                 expect(error).beNil();
                 BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:outputPath isDirectory:false];
                 expect(exists).beTruthy();
@@ -81,7 +81,7 @@ describe(@"test the api", ^{
     
     it(@"should get a node", ^{
         waitUntil(^(DoneCallback done) {
-            [IpfsLiteApi.instance getNodeForCid:apolloArchiverCid completion:^(Node * _Nullable node, NSError * _Nullable error) {
+            [IpfsLiteApi.instance getNodeForCid:apolloArchiverCid completion:^(TTENode * _Nullable node, NSError * _Nullable error) {
                 expect(error).beNil();
                 expect(node).notTo.beNil();
                 done();
@@ -90,10 +90,10 @@ describe(@"test the api", ^{
     });
     
     it(@"should get many nodes", ^{
-        NSMutableArray<Node *> *nodes = [[NSMutableArray alloc] init];
+        NSMutableArray<TTENode *> *nodes = [[NSMutableArray alloc] init];
         waitUntil(^(DoneCallback done) {
             NSMutableArray *cids = @[refTextNode.block.cid, refImageNode.block.cid].mutableCopy;
-            [IpfsLiteApi.instance getNodesForCids:cids handler:^(BOOL nodesDone, Node * _Nullable node, NSError * _Nullable error) {
+            [IpfsLiteApi.instance getNodesForCids:cids handler:^(BOOL nodesDone, TTENode * _Nullable node, NSError * _Nullable error) {
                 expect(error).beNil();
                 if (node) {
                     [nodes addObject:node];
@@ -136,7 +136,7 @@ describe(@"test the api", ^{
     it(@"should resolve a path", ^{
         waitUntil(^(DoneCallback done) {
             NSMutableArray *path = @[@"frontend", @"foo", @"bar"].mutableCopy;
-            [IpfsLiteApi.instance resolveLinkInNodeWithCid:apolloArchiverCid path:path completion:^(Link * _Nullable link, NSArray<NSString *> * _Nullable remainingPath, NSError * _Nullable error) {
+            [IpfsLiteApi.instance resolveLinkInNodeWithCid:apolloArchiverCid path:path completion:^(TTELink * _Nullable link, NSArray<NSString *> * _Nullable remainingPath, NSError * _Nullable error) {
                 expect(error).beNil();
                 expect(link).notTo.beNil();
                 expect(link.name).equal(@"frontend");

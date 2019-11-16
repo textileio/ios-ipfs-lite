@@ -27,7 +27,7 @@ const int CHUNK_SIZE = 1024*32;
         return started;
     }
     NSString *host = [NSString stringWithFormat:@"localhost:%ld", port];
-    IpfsLiteApi.instance.client = [[IpfsLite alloc] initWithHost:host];
+    IpfsLiteApi.instance.client = [[TTEIpfsLite alloc] initWithHost:host];
     return YES;
 }
 
@@ -38,10 +38,10 @@ const int CHUNK_SIZE = 1024*32;
     return self;
 }
 
-- (void)addFileWithParams:(AddParams *)addParams input:(NSInputStream *)input completion:(void (^)(Node * _Nullable, NSError * _Nullable))completion {
-    ResponseHandler<AddFileResponse *> *handler = [[ResponseHandler alloc] init];
-    __block AddFileResponse *response;
-    handler.receive = ^(AddFileResponse *resp){
+- (void)addFileFromInput:(NSInputStream *)input params:(TTEAddParams *)params completion:(void (^)(TTENode * _Nullable, NSError * _Nullable))completion {
+    ResponseHandler<TTEAddFileResponse *> *handler = [[ResponseHandler alloc] init];
+    __block TTEAddFileResponse *response;
+    handler.receive = ^(TTEAddFileResponse *resp){
         response = resp;
     };
     handler.close = ^(NSDictionary *metadata, NSError *error){
@@ -52,8 +52,8 @@ const int CHUNK_SIZE = 1024*32;
     
     [call start];
     
-    AddFileRequest *request = [[AddFileRequest alloc] init];
-    [request setAddParams:addParams];
+    TTEAddFileRequest *request = [[TTEAddFileRequest alloc] init];
+    [request setAddParams:params];
     [call writeMessage:request];
     
     StreamHandler *sh = [[StreamHandler alloc] initWithOnBytes:^(NSStream * _Nonnull stream) {
@@ -78,21 +78,21 @@ const int CHUNK_SIZE = 1024*32;
 
 - (void)getFileWithCid:(NSString *)cid completion:(void (^)(NSData * _Nullable, NSError * _Nullable))completion {
     NSOutputStream *output = [NSOutputStream outputStreamToMemory];
-    [self getFileWithCid:cid toOutput:output completion:^(NSError * _Nullable error) {
+    [self getFileToOutput:output cid:cid completion:^(NSError * _Nullable error) {
         NSData *data = [output propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
         completion(data, error);
     }];
 }
 
-- (void)getFileWithCid:(NSString *)cid toOutput:(NSOutputStream *)output completion:(void (^)(NSError * _Nullable))completion {
-    NSMutableArray<GetFileResponse *> *queue = [[NSMutableArray alloc] init];
+- (void)getFileToOutput:(NSOutputStream *)output cid:(NSString *)cid completion:(void (^)(NSError * _Nullable))completion {
+    NSMutableArray<TTEGetFileResponse *> *queue = [[NSMutableArray alloc] init];
     __block BOOL shouldWriteDirect = NO;
     
-    GetFileRequest *request = [[GetFileRequest alloc] init];
+    TTEGetFileRequest *request = [[TTEGetFileRequest alloc] init];
     [request setCid:cid];
     
-    ResponseHandler<GetFileResponse *> *handler = [[ResponseHandler alloc] init];
-    handler.receive = ^(GetFileResponse *resp){
+    ResponseHandler<TTEGetFileResponse *> *handler = [[ResponseHandler alloc] init];
+    handler.receive = ^(TTEGetFileResponse *resp){
         if (shouldWriteDirect) {
             [output write:[resp.chunk bytes] maxLength:[resp.chunk length]];
         } else {
@@ -108,7 +108,7 @@ const int CHUNK_SIZE = 1024*32;
     
     StreamHandler *sh = [[StreamHandler alloc] initWithOnBytes:^(NSStream * _Nonnull stream) {
     } onSpaceAvailable:^(NSStream * _Nonnull stream) {
-        GetFileResponse *item = [queue firstObject];
+        TTEGetFileResponse *item = [queue firstObject];
         if (item) {
             shouldWriteDirect = NO;
             [queue removeObjectAtIndex:0];
@@ -130,11 +130,11 @@ const int CHUNK_SIZE = 1024*32;
 }
 
 - (void)hasBlock:(NSString *)cid completion:(void (^)(BOOL, NSError * _Nullable))completion {
-    HasBlockRequest *request = [[HasBlockRequest alloc] init];
+    TTEHasBlockRequest *request = [[TTEHasBlockRequest alloc] init];
     [request setCid:cid];
-    ResponseHandler<HasBlockResponse *> *handler = [[ResponseHandler alloc] init];
-    __block HasBlockResponse *response;
-    handler.receive = ^(HasBlockResponse *resp) {
+    ResponseHandler<TTEHasBlockResponse *> *handler = [[ResponseHandler alloc] init];
+    __block TTEHasBlockResponse *response;
+    handler.receive = ^(TTEHasBlockResponse *resp) {
         response = resp;
     };
     handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
@@ -144,13 +144,13 @@ const int CHUNK_SIZE = 1024*32;
     [call start];
 }
 
-- (void)getNodeForCid:(NSString *)cid completion:(void (^)(Node * _Nullable, NSError * _Nullable))completion {
-    GetNodeRequest *request = [[GetNodeRequest alloc] init];
+- (void)getNodeForCid:(NSString *)cid completion:(void (^)(TTENode * _Nullable, NSError * _Nullable))completion {
+    TTEGetNodeRequest *request = [[TTEGetNodeRequest alloc] init];
     [request setCid:cid];
     
-    ResponseHandler<GetNodeResponse *> *handler = [[ResponseHandler alloc] init];
-    __block GetNodeResponse *response;
-    handler.receive = ^(GetNodeResponse *resp) {
+    ResponseHandler<TTEGetNodeResponse *> *handler = [[ResponseHandler alloc] init];
+    __block TTEGetNodeResponse *response;
+    handler.receive = ^(TTEGetNodeResponse *resp) {
         response = resp;
     };
     handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
@@ -160,17 +160,17 @@ const int CHUNK_SIZE = 1024*32;
     GRPCUnaryProtoCall *call = [self.client getNodeWithMessage:request responseHandler:handler callOptions:[self defaultCallOptions]];
     [call start];
 }
-- (void)getNodesForCids:(NSMutableArray<NSString *> *)cids handler:(void (^)(BOOL, Node * _Nullable, NSError * _Nullable))handler {
-    GetNodesRequest *request = [[GetNodesRequest alloc] init];
+- (void)getNodesForCids:(NSMutableArray<NSString *> *)cids handler:(void (^)(BOOL, TTENode * _Nullable, NSError * _Nullable))handler {
+    TTEGetNodesRequest *request = [[TTEGetNodesRequest alloc] init];
     [request setCidsArray:cids];
     
-    ResponseHandler<GetNodesResponse *> *respHandler = [[ResponseHandler alloc] init];
-    respHandler.receive = ^(GetNodesResponse *resp) {
+    ResponseHandler<TTEGetNodesResponse *> *respHandler = [[ResponseHandler alloc] init];
+    respHandler.receive = ^(TTEGetNodesResponse *resp) {
         switch (resp.optionOneOfCase) {
-            case GetNodesResponse_Option_OneOfCase_Node:
+            case TTEGetNodesResponse_Option_OneOfCase_Node:
                 handler(NO, resp.node, nil);
                 break;
-            case GetNodesResponse_Option_OneOfCase_Error: {
+            case TTEGetNodesResponse_Option_OneOfCase_Error: {
                 NSError *e = [NSError errorWithDomain:@"ipfs-lite" code:0 userInfo:@{NSLocalizedDescriptionKey : resp.error}];
                 handler(NO, nil, e);
                 break;
@@ -188,10 +188,10 @@ const int CHUNK_SIZE = 1024*32;
 }
 
 - (void)removeNodeForCid:(NSString *)cid completion:(void (^)(NSError * _Nullable))completion {
-    RemoveNodeRequest *request = [[RemoveNodeRequest alloc] init];
+    TTERemoveNodeRequest *request = [[TTERemoveNodeRequest alloc] init];
     [request setCid:cid];
     
-    ResponseHandler<RemoveNodeResponse *> *handler = [[ResponseHandler alloc] init];
+    ResponseHandler<TTERemoveNodeResponse *> *handler = [[ResponseHandler alloc] init];
     handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
         completion(error);
     };
@@ -201,10 +201,10 @@ const int CHUNK_SIZE = 1024*32;
 }
 
 - (void)removeNodesForCids:(NSMutableArray<NSString *> *)cids completion:(void (^)(NSError * _Nullable))completion {
-    RemoveNodesRequest *request = [[RemoveNodesRequest alloc] init];
+    TTERemoveNodesRequest *request = [[TTERemoveNodesRequest alloc] init];
     [request setCidsArray:cids];
     
-    ResponseHandler<RemoveNodesResponse *> *handler = [[ResponseHandler alloc] init];
+    ResponseHandler<TTERemoveNodesResponse *> *handler = [[ResponseHandler alloc] init];
     handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
         completion(error);
     };
@@ -213,14 +213,14 @@ const int CHUNK_SIZE = 1024*32;
     [call start];
 }
 
-- (void)resolveLinkInNodeWithCid:(NSString *)cid path:(NSMutableArray<NSString *> *)path completion:(void (^)(Link * _Nullable, NSArray<NSString *> * _Nullable, NSError * _Nullable))completion {
-    ResolveLinkRequest *request = [[ResolveLinkRequest alloc] init];
+- (void)resolveLinkInNodeWithCid:(NSString *)cid path:(NSMutableArray<NSString *> *)path completion:(void (^)(TTELink * _Nullable, NSArray<NSString *> * _Nullable, NSError * _Nullable))completion {
+    TTEResolveLinkRequest *request = [[TTEResolveLinkRequest alloc] init];
     [request setNodeCid:cid];
     [request setPathArray:path];
     
-    ResponseHandler<ResolveLinkResponse *> *handler = [[ResponseHandler alloc] init];
-    __block ResolveLinkResponse *response;
-    handler.receive = ^(ResolveLinkResponse *resp) {
+    ResponseHandler<TTEResolveLinkResponse *> *handler = [[ResponseHandler alloc] init];
+    __block TTEResolveLinkResponse *response;
+    handler.receive = ^(TTEResolveLinkResponse *resp) {
         response = resp;
     };
     handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {
@@ -232,14 +232,14 @@ const int CHUNK_SIZE = 1024*32;
 }
 
 - (void)treeInNodeWithCid:(NSString *)cid fromPath:(NSString *)path depth:(int)depth completion:(void (^)(NSArray<NSString *> * _Nullable, NSError * _Nullable))completion {
-    TreeRequest *request = [[TreeRequest alloc] init];
+    TTETreeRequest *request = [[TTETreeRequest alloc] init];
     [request setNodeCid:cid];
     [request setPath:path];
     [request setDepth:depth];
     
-    ResponseHandler<TreeResponse *> *handler = [[ResponseHandler alloc] init];
-    __block TreeResponse *response;
-    handler.receive = ^(TreeResponse *resp) {
+    ResponseHandler<TTETreeResponse *> *handler = [[ResponseHandler alloc] init];
+    __block TTETreeResponse *response;
+    handler.receive = ^(TTETreeResponse *resp) {
         response = resp;
     };
     handler.close = ^(NSDictionary * _Nullable metadata, NSError * _Nullable error) {

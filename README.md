@@ -39,8 +39,9 @@ IPFS Lite runs the minimal setup required to provide a DAG service. It is a port
 
 - [x] Launch IPFS Lite
 - [x] Stop IPFS Lite
-- [x] `addFileWithParams:input:completion:` Add data via `NSInputStream`.
+- [x] `addFileFromInput:params:completion:` Add data via `NSInputStream`.
 - [x] `getFileWithCid:completion:` Asynchronously get file by content address.
+- [x] `getFileToOutput:cid:completion:` Asynchronously get file by content address and write it to a `NSOutputStream`
 - [x] `getNodeForCid:completion:` Asynchronously get an IPLD node from IPFS.
 - [x] `getNodesForCids:completion:` Get multiple IPLD nodes.
 - [x] `hasBlock:completion:` Query if the local peer has the specified block
@@ -83,7 +84,7 @@ BOOL success = [IpfsLiteApi launch:repoPath debug: false error:&error];
 
 ```objc
 NSInputStream *input = [[NSInputStream alloc] initWithData:[@"Hello there\n" dataUsingEncoding:NSUTF8StringEncoding]];
-[IpfsLiteApi.instance addFileWithParams:[[AddParams alloc] init] input:input completion:^(Node * _Nullable node, NSError * _Nullable error) {
+[IpfsLiteApi.instance addFileFromInput:input parms:[[TTEAddParams alloc] init] completion:^(Node * _Nullable node, NSError * _Nullable error) {
     // handle the node or error
 }];
 ```
@@ -93,7 +94,7 @@ NSInputStream *input = [[NSInputStream alloc] initWithData:[@"Hello there\n" dat
 ```objc
 NSString *path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"jpeg"];
 NSInputStream *input = [[NSInputStream alloc] initWithFileAtPath:path];
-[IpfsLiteApi.instance addFileWithParams:[[AddParams alloc] init] input:input completion:^(Node * _Nullable node, NSError * _Nullable error) {
+[IpfsLiteApi.instance addFileFromInput:input params:[[TTEAddParams alloc] init] completion:^(Node * _Nullable node, NSError * _Nullable error) {
     // handle the node or error
 }];
 ```
@@ -104,7 +105,7 @@ NSInputStream *input = [[NSInputStream alloc] initWithFileAtPath:path];
 NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 NSString *outputPath = [documents stringByAppendingPathComponent:@"out.jpeg"];
 NSOutputStream *output = [NSOutputStream outputStreamToFileAtPath:outputPath append:NO];
-[IpfsLiteApi.instance getFileWithCid:@"<a-file-cid>" toOutput:output completion:^(NSError * _Nullable error) {
+[IpfsLiteApi.instance getFileToOutput:output cid:@"<a-file-cid>" completion:^(NSError * _Nullable error) {
     // Handle error if it exists or interact with data written to disk
 }];
 ```

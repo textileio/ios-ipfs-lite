@@ -26,14 +26,14 @@
 ////    NSInputStream *input = [[NSInputStream alloc] initWithData:[@"Hello there\n" dataUsingEncoding:NSUTF8StringEncoding]];
 //    NSString *path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"jpeg"];
 //    NSInputStream *input = [[NSInputStream alloc] initWithFileAtPath:path];
-//    [IpfsLiteApi.instance addFileWithParams:[[AddParams alloc] init] input:input completion:^(Node * _Nullable node, NSError * _Nullable error) {
+    //    [IpfsLiteApi.instance addFileFromInput:input params:[[TTEAddParams alloc] init] completion:^(Node * _Nullable node, NSError * _Nullable error) {
 //        if (error) {
 //            NSLog(@"got error: %@", error.localizedDescription);
 //            return;
 //        }
 //        NSLog(@"got node: %@", node);
 //        NSOutputStream *output = [NSOutputStream outputStreamToMemory];
-//        [IpfsLiteApi.instance getFileWithCid:node.block.cid toOutput:output completion:^(NSError * _Nullable error) {
+//            [IpfsLiteApi.instance getFileToOutput:output cid:node.block.cid completion:^(NSError * _Nullable error) {
 //            if (error) {
 //                NSLog(@"Completed with error: %@", error.localizedDescription);
 //                return;
