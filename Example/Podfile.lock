@@ -6,49 +6,49 @@ PODS:
     - BoringSSL-GRPC/Interface (= 0.0.5)
   - BoringSSL-GRPC/Interface (0.0.5)
   - Expecta (1.0.6)
-  - gRPC-Core (1.25.0):
-    - gRPC-Core/Implementation (= 1.25.0)
-    - gRPC-Core/Interface (= 1.25.0)
-  - gRPC-Core/Implementation (1.25.0):
+  - gRPC-Core (1.26.0):
+    - gRPC-Core/Implementation (= 1.26.0)
+    - gRPC-Core/Interface (= 1.26.0)
+  - gRPC-Core/Implementation (1.26.0):
     - BoringSSL-GRPC (= 0.0.5)
-    - gRPC-Core/Interface (= 1.25.0)
-  - gRPC-Core/Interface (1.25.0)
-  - grpc-ipfs-lite (0.1.1)
-  - gRPC-ProtoRPC (1.25.0):
-    - gRPC-ProtoRPC/Legacy (= 1.25.0)
-    - gRPC-ProtoRPC/Legacy-Header (= 1.25.0)
-    - gRPC-ProtoRPC/Main (= 1.25.0)
-  - gRPC-ProtoRPC/Legacy (1.25.0):
-    - gRPC-ProtoRPC/Legacy-Header (= 1.25.0)
-    - gRPC-ProtoRPC/Main (= 1.25.0)
-    - gRPC-RxLibrary (= 1.25.0)
-    - gRPC/GRPCCore (= 1.25.0)
+    - gRPC-Core/Interface (= 1.26.0)
+  - gRPC-Core/Interface (1.26.0)
+  - grpc-ipfs-lite (0.1.2)
+  - gRPC-ProtoRPC (1.26.0):
+    - gRPC-ProtoRPC/Legacy (= 1.26.0)
+    - gRPC-ProtoRPC/Legacy-Header (= 1.26.0)
+    - gRPC-ProtoRPC/Main (= 1.26.0)
+  - gRPC-ProtoRPC/Legacy (1.26.0):
+    - gRPC-ProtoRPC/Legacy-Header (= 1.26.0)
+    - gRPC-ProtoRPC/Main (= 1.26.0)
+    - gRPC-RxLibrary (= 1.26.0)
+    - gRPC/GRPCCore (= 1.26.0)
     - Protobuf (~> 3.0)
-  - gRPC-ProtoRPC/Legacy-Header (1.25.0)
-  - gRPC-ProtoRPC/Main (1.25.0):
-    - gRPC-ProtoRPC/Legacy-Header (= 1.25.0)
-    - gRPC/Interface (= 1.25.0)
+  - gRPC-ProtoRPC/Legacy-Header (1.26.0)
+  - gRPC-ProtoRPC/Main (1.26.0):
+    - gRPC-ProtoRPC/Legacy-Header (= 1.26.0)
+    - gRPC/Interface (= 1.26.0)
     - Protobuf (~> 3.0)
-  - gRPC-RxLibrary (1.25.0):
-    - gRPC-RxLibrary/Implementation (= 1.25.0)
-    - gRPC-RxLibrary/Interface (= 1.25.0)
-  - gRPC-RxLibrary/Implementation (1.25.0):
+  - gRPC-RxLibrary (1.26.0):
+    - gRPC-RxLibrary/Implementation (= 1.26.0)
+    - gRPC-RxLibrary/Interface (= 1.26.0)
+  - gRPC-RxLibrary/Implementation (1.26.0):
     - gRPC-RxLibrary/Interface
-  - gRPC-RxLibrary/Interface (1.25.0)
-  - gRPC/GRPCCore (1.25.0):
-    - gRPC-Core (= 1.25.0)
-    - gRPC-RxLibrary (= 1.25.0)
-    - gRPC/Interface (= 1.25.0)
-    - gRPC/Interface-Legacy (= 1.25.0)
-  - gRPC/Interface (1.25.0):
-    - gRPC/Interface-Legacy (= 1.25.0)
-  - gRPC/Interface-Legacy (1.25.0):
-    - gRPC-RxLibrary/Interface (= 1.25.0)
+  - gRPC-RxLibrary/Interface (1.26.0)
+  - gRPC/GRPCCore (1.26.0):
+    - gRPC-Core (= 1.26.0)
+    - gRPC-RxLibrary (= 1.26.0)
+    - gRPC/Interface (= 1.26.0)
+    - gRPC/Interface-Legacy (= 1.26.0)
+  - gRPC/Interface (1.26.0):
+    - gRPC/Interface-Legacy (= 1.26.0)
+  - gRPC/Interface-Legacy (1.26.0):
+    - gRPC-RxLibrary/Interface (= 1.26.0)
   - IpfsLiteApi (0.0.1-dev):
-    - grpc-ipfs-lite (= 0.1.1)
+    - grpc-ipfs-lite (= 0.1.2)
     - gRPC-ProtoRPC
     - Protobuf
-  - Protobuf (3.10.0)
+  - Protobuf (3.11.2)
   - Specta (1.0.7)
 
 DEPENDENCIES:
@@ -75,13 +75,13 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   BoringSSL-GRPC: 8f2c6b5fbae71d1f3aabb787a52fd4929d1eef33
   Expecta: 3b6bd90a64b9a1dcb0b70aa0e10a7f8f631667d5
-  gRPC: 7fb3e0d14ce1f87f1c27a9e46167da5168ab9092
-  gRPC-Core: 76552aeeae7c42172d52224cc6f3cf70bff577f5
-  grpc-ipfs-lite: 9674f39045d046dfd09a89bc7373f80a7c878576
-  gRPC-ProtoRPC: b00a140f2f21872305cd8e3ef91b2dfe28914b5c
-  gRPC-RxLibrary: cd49d9cd343fd00e2326a65522e82c2285ebe84b
-  IpfsLiteApi: d1c8d156a8e7955b1131baa8a6aa78e57c279205
-  Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
+  gRPC: 01cad0fe812eb92170a8748b7507607752350e2b
+  gRPC-Core: a9f9bd0cc7fe2a2d9930b415a19f29b8062dcb52
+  grpc-ipfs-lite: 056134abceae11cafca1f829d2bd70871b2c71c4
+  gRPC-ProtoRPC: 8888afc144159d4e4c3716178bff686b7e83b66f
+  gRPC-RxLibrary: c1c5cfd22a05064bf05584115aee703298a9f44a
+  IpfsLiteApi: f2a0909ae5ea10d43d778ff29ddec389c49a0b2e
+  Protobuf: dd1aaea7140debfe4dd0683fb8ef208e527ae153
   Specta: 3e1bd89c3517421982dc4d1c992503e48bd5fe66
 
 PODFILE CHECKSUM: dc4c2ed6cc7c4e4c0f881851ba718b949045e69a
