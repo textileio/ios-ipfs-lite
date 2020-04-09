@@ -14,7 +14,7 @@ describe(@"test the api", ^{
         NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         NSString *repoPath = [documents stringByAppendingPathComponent:@"ipfs-lite"];
         NSError *error;
-        BOOL success = [IpfsLiteApi launch:repoPath debug: false error:&error];
+        BOOL success = [IpfsLiteApi launch:repoPath debug:false lowMem:true error:&error];
         expect(success).beTruthy();
         expect(error).beNil();
     });

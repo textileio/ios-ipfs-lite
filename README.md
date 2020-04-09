@@ -20,13 +20,15 @@ IPFS Lite runs the minimal setup required to get and put IPLD DAGs on the IPFS n
 - [ios-ipfs-lite](#ios-ipfs-lite)
   - [Table of Contents](#table-of-contents)
   - [Background](#background)
+    - [IPFS-lite Libraries](#ipfs-lite-libraries)
   - [Roadmap](#roadmap)
   - [Install](#install)
   - [Usage](#usage)
     - [Initialize and start a Peer](#initialize-and-start-a-peer)
     - [Add data](#add-data)
     - [Add a file](#add-a-file)
-    - [Fetch a file by CID](#fetch-a-file-by-cid)
+    - [Fetch a file by CID to a NSOutputStream](#fetch-a-file-by-cid-to-a-nsoutputstream)
+    - [Fetch a node by CID](#fetch-a-node-by-cid)
   - [Maintainers](#maintainers)
   - [Contributing](#contributing)
   - [License](#license)
@@ -89,7 +91,7 @@ and run `pod install`
 NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 NSString *repoPath = [documents stringByAppendingPathComponent:@"ipfs-lite"];
 NSError *error;
-BOOL success = [IpfsLiteApi launch:repoPath debug: false error:&error];
+BOOL success = [IpfsLiteApi launch:repoPath debug:false lowMem: true error:&error];
 ```
 
 ### Add data
