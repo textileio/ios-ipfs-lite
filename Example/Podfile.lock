@@ -13,7 +13,7 @@ PODS:
     - BoringSSL-GRPC (= 0.0.5)
     - gRPC-Core/Interface (= 1.26.0)
   - gRPC-Core/Interface (1.26.0)
-  - grpc-ipfs-lite (0.1.2)
+  - grpc-ipfs-lite (0.1.4)
   - gRPC-ProtoRPC (1.26.0):
     - gRPC-ProtoRPC/Legacy (= 1.26.0)
     - gRPC-ProtoRPC/Legacy-Header (= 1.26.0)
@@ -45,7 +45,7 @@ PODS:
   - gRPC/Interface-Legacy (1.26.0):
     - gRPC-RxLibrary/Interface (= 1.26.0)
   - IpfsLiteApi (0.0.1-dev):
-    - grpc-ipfs-lite (= 0.1.2)
+    - grpc-ipfs-lite (= 0.1.4)
     - gRPC-ProtoRPC
     - Protobuf
   - Protobuf (3.11.2)

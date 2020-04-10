@@ -8,7 +8,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) TTEIpfsLite *client;
 
-+ (BOOL)launch:(NSString *)datastorePath debug:(BOOL)debug error:(NSError **)error;
++ (BOOL)launch:(NSString *)datastorePath debug:(BOOL)debug lowMem:(BOOL)lowMem error:(NSError **)error;
 + (IpfsLiteApi *)instance;
 
 - (void)addFileFromInput:(NSInputStream *)input params:(TTEAddParams *)params completion:(void (^)(TTENode * _Nullable node, NSError * _Nullable error))completion;

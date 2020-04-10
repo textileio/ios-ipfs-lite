@@ -20,9 +20,9 @@ const int CHUNK_SIZE = 1024*32;
     return instnace;
 }
 
-+ (BOOL)launch:(NSString *)datastorePath debug:(BOOL)debug error:(NSError **)error {
++ (BOOL)launch:(NSString *)datastorePath debug:(BOOL)debug lowMem:(BOOL)lowMem error:(NSError **)error {
     long port;
-    BOOL started = MobileStart(datastorePath, debug, &port, error);
+    BOOL started = MobileStart(datastorePath, debug, lowMem, &port, error);
     if (!started) {
         return started;
     }
